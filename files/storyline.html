@@ -1,0 +1,40 @@
+<template name="TEMPLATE_NAME">
+
+{{#if getItems}}
+   <ul class="storyline">
+	{{#each getItems}}
+    <li class="storyline-item">
+        <div class="storyline-badge cd-picture">
+          <i class="fa fa-newspaper-o"></i>
+        </div>
+        <div class="storyline-panel" data="{{delveURL}}">
+            <div class="storyline-heading">
+                <h4>{{title}}</h4>
+            </div>
+            <div class="storyline-body" data="{{delveURL}}">
+			   {{#if imageURL}}
+				<figure class="image">
+					<img id="figure-img" src="{{imageURL}}" alt="{{title}} data="{{delveURL}}"">
+					<figcaption>{{imageCaption}}</figcaption>
+				</figure>
+				{{/if}}
+				<div class="storyline-text">{{description}}</div>
+            </div>
+            <div class="storyline-footer">
+			   {{#if delveURL}}
+					<p class="text-right"><span id="delve-button" data="{{delveURL}}" title="Delve">Delve <i class="fa fa-external-link"></i></span></p>
+				{{/if}}
+            </div>
+        </div>
+    </li>
+	{{/each}}
+    <li class="clearfix no-float"></li>
+	</ul>
+
+{{else}}
+	<div class="alert alert-info">
+		This story is empty. :(
+	</div>
+{{/if}}
+
+</template>

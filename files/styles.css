@@ -1,0 +1,54 @@
+.jumbotron {
+	text-align: center;
+	color: white;
+}
+
+.jumbotron h1 {
+	padding-top: 50px;
+	font-size: 72px;
+	font-weight: 700;
+}
+
+.jumbotron p a {
+	color: yellow;
+}
+
+figure.image {
+  display: inline-block;
+  
+  margin: 10px;
+  padding: 5px;
+  
+  border: 10px solid white;
+
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
+}
+
+figure.image img {
+	width: 100%;
+}
+figure.image figcaption {
+  text-align: center;
+  margin-top: 8px;
+}
+
+section {
+	padding: 0 0 80px 0;
+}
+
+section.bg-blue {
+	color: #fff;
+	background-color: #337ab7;	
+}
+
+section h1 {
+	padding-top: 80px;
+	font-size: 48px;
+	font-weight: 700;
+}
+
+section .large-icon {
+	font-size: 72px;
+}

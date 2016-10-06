@@ -1,0 +1,52 @@
+<template name="TEMPLATE_NAME">
+<p>
+Hello.<br/>
+component_id: COMPONENT_ID<br/>
+template_name: TEMPLATE_NAME<br/>
+</p>
+
+<div id="COMPONENT_ID" class="well object-form-container">
+	<h2>COMPONENT_TITLE</h2>
+
+{{#if getItems}}
+	<table class="table table-hover table-striped object-array-table">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Description</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{#each getItems}}
+				<tr>
+					<td>
+						{{title}}
+					</td>
+					<td>
+						{{description}}
+					</td>
+					<td class="td-icon">
+						<span id="delete-button" class="fa fa-trash-o" title="Delete"></span>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+
+	{{#each getItems}}
+		<figure class="image">
+			<img src="{{imageURL}}" alt="{{title}}">
+			<figcaption>{{description}}</figcaption>
+		</figure>
+	{{/each}}
+
+{{else}}
+	<div class="alert alert-info">
+		(empty)
+	</div>
+{{/if}}
+
+</div>
+</template>

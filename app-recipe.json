@@ -1,0 +1,697 @@
+{
+	"application": {
+		"title": "Storyboard",
+
+		"theme": "bootswatch-cerulean",
+
+		"footer_text": "Copyright &copy; 2016",
+		
+		"roles": [ "admin", "user" ],
+		"default_role": "user",
+		"send_verification_email": true,
+
+		"server_startup_source_file": "files/startup.js",
+		
+		"copy_files": [
+			{ "source": "files/styles.css", "dest": "CLIENT_STYLES_DIR/styles.css" },
+			{ "source": "files/storyline.css", "dest": "CLIENT_STYLES_DIR/storyline.css" },
+			{ "source": "files/storytitle.css", "dest": "CLIENT_STYLES_DIR/storytitle.css" },
+			{ "source": "files/storycard.css", "dest": "CLIENT_STYLES_DIR/storycard.css" },
+			{ "source": "files/jumbotron-bg.jpg", "dest": "PUBLIC_IMAGES_DIR/jumbotron-bg.jpg" }
+		],
+		
+		"collections": [
+			{
+				"name": "boards",
+				"fields": [
+					{ "name": "title", "title": "Title", "type": "string", "required": true },
+					{ "name": "description", "title": "Description", "type": "string", "input": "textarea", "required": true },
+					{ "name": "private", "title": "Private", "type": "bool", "default": false, "input": "checkbox", "display_helper": "booleanToYesNo", "required": false },
+					{ "name": "blocked", "title": "Blocked", "type": "bool", "default": false, "input": "checkbox", "display_helper": "booleanToYesNo", "required": false },
+					{ "name": "imageURL", "title": "Image URL", "type": "url", "required": false },
+					{ "name": "shared", "title": "Shared", "type": "string", "default": "none", "required": false }
+				],
+				"owner_field": "ownerId",
+
+				"roles_allowed_to_read": ["admin", "owner"],
+				"roles_allowed_to_update": ["admin", "owner"],
+				"roles_allowed_to_delete": ["admin", "owner"]
+			},
+			
+			{
+				"name": "board_items",
+				"fields": [
+					{ "name": "title", "title": "Title", "type": "string", "required": true },
+					{ "name": "step", "title": "Step", "type": "integer", "min" : 0, "required": true },
+					{ "name": "description", "title": "Description", "input": "textarea", "required": true },
+					{ "name": "imageURL", "title": "Image URL", "type": "url", "required": false },
+					{ "name": "imageCaption", "title": "Image Caption", "type": "string", "required": false },
+					{ "name": "delveURL", "title": "Delve URL", "type": "url", "required": false }
+				],
+				"owner_field": "ownerId",
+
+				"roles_allowed_to_read": ["admin", "owner"],
+				"roles_allowed_to_update": ["admin", "owner"],
+				"roles_allowed_to_delete": ["admin", "owner"]
+			}
+
+		],
+
+		"queries": [
+			{
+				"name": "admin_users",
+				"collection": "users",
+				"filter": {}
+			},
+			{
+				"name": "admin_user",
+				"collection": "users",
+				"filter": { "_id": ":userId" },
+				"find_one": true
+			},
+			{
+				"name": "users_null",
+				"collection": "users",
+				"filter": { "_id": null },
+				"find_one": true
+			},
+			{
+				"name": "current_user_data",
+				"collection": "users",
+				"filter": { "_id": "Meteor.userId()" },
+				"find_one": true
+			},
+			{
+				"name": "boards",
+				"collection": "boards",
+				"filter": {}
+			},
+			{
+				"name": "boards_empty",
+				"collection": "boards",
+				"filter": {"_id": null},
+				"find_one": true
+			},
+			{
+				"name": "board_details",
+				"collection": "boards",
+				"filter": { "_id": ":boardId" },
+				"find_one": true
+			},
+			{
+				"name": "board_items",
+				"collection": "board_items",
+				"filter": { "boardId": ":boardId" },
+				"options": { "sort" : { "step": 1 } }
+			},
+			{
+				"name": "board_items_empty",
+				"collection": "board_items",
+				"filter": { "_id": null },
+				"find_one": true
+			},
+			{
+				"name": "board_item",
+				"collection": "board_items",
+				"filter": { "_id": ":itemId" },
+				"find_one": true
+			},
+			{
+				"name": "boards_open",
+				"collection": "boards",
+				"filter": { "private": false },
+				"options": {}
+			},
+			{
+				"name": "board_details_open",
+				"collection": "boards",
+				"filter": { "_id": ":boardId", "private": false },
+ 				"find_one": true
+			},
+			{
+				"name": "board_items_open",
+				"collection": "board_items",
+				"filter": { "boardId": ":boardId" },
+				"options": { "sort" : { "step": 1 } }
+			}
+
+		],
+
+		"public_zone": {
+			"components": [
+				{
+					"name": "left_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Home", "route": "home_public", "icon_class": "fa fa-home" },
+						{ "title": "Stories", "route": "story", "icon_class": "fa fa-book" }
+					]
+				},
+
+				{
+					"name": "right_menu",
+					"type": "menu",
+					"class": "nav navbar-nav navbar-right",
+					"scroll_spy_selector": "body",
+					"items": [
+						{ "title": "About", "url": "about" },
+						{ "title": "Register", "route": "register" },
+						{ "title": "Login", "route": "login" }
+					]
+				}
+			],
+			
+			"pages": [
+				{
+					"name": "home_public",
+					"title": "",
+					"components": [
+						{
+							"name": "jumbotron",
+							"type": "jumbotron",
+							"dest_position": "before",
+
+							"image_url": "images/jumbotron-bg.jpg",
+
+							"components": [
+								{
+									"name": "jumbotron_content",
+									"type": "custom_component",
+									"custom_template": "files/jumbotron_content.html"
+								}
+							]
+						}
+					],
+			
+					"template_rendered_code": "$('section, .jumbotron').css('min-height', $(window).height() + 'px'); window.scrollTo(0, 0);"
+				},
+				{ "name": "story", 
+					"title": "Stories",
+					"components": [
+						{
+							"name": "story",
+							"type": "custom_component",
+							"custom_template": "files/storycard.html",
+							"query_name" : "boards_open",
+							"query_params": []
+						}
+					],
+					
+					"pages": [
+						{ "name": "storyline", 
+							"route_params": ["boardId"],
+							"components": [
+								{
+									"name": "storytitle",
+									"type": "custom_component",
+									"custom_template": "files/storytitle.html",
+									"query_name" : "board_details_open",
+									"query_params": [
+										{ "name": "_id", "value": "this.params.boardId" }
+									]
+								},
+								{
+									"name": "storyline",
+									"type": "custom_component",
+									"custom_template": "files/storyline.html",
+									"query_name": "board_items_open",
+									"query_params": [
+										{ "name": "boardId", "value": "this.params.boardId" }
+									]
+								}
+							],
+							"template_rendered_code": "$('li.storyline-item:odd').addClass('storyline-inverted');"
+						}
+					]
+				},				
+				{ "name": "about", "title": "About",
+					"components": [
+						{
+							"name": "about_content",
+							"type": "markdown",
+							"source_file": "files/about.md"
+						},
+
+						{
+							"name": "three_columns",
+							"type": "custom_component",
+							"custom_template": "files/three_columns.html"
+						}
+					]
+				},
+				{ "name": "login", "template": "login" },
+				{ "name": "register", "template": "register" },
+				{ "name": "verify_email", "template": "verify_email", "route_params": ["verifyEmailToken"] },
+				{ "name": "forgot_password", "template": "forgot_password" },
+				{ "name": "reset_password", "template": "reset_password", "route_params": ["resetPasswordToken"] }
+			]
+
+		},
+
+		"private_zone": {
+
+			"components": [
+				{
+					"name": "left_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Home", "route": "home_private", "icon_class": "fa fa-home" },
+						{ "title": "Stories", "route": "storyall", "icon_class": "fa fa-book" },
+						{ "title": "MyStories", "route": "storymy", "icon_class": "fa fa-map-o" }
+					]
+				},
+				{
+					"name": "right_menu",
+					"type": "menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Boards", "route": "boards", "icon_class": "fa fa-pencil-square-o" },
+						{ "title": "Admin", "route": "admin", "icon_class": "fa fa-wrench" },
+
+						{
+							"title": "{{userEmail}}",
+							"items": [
+								{ "title": "Settings", "route": "user_settings" },
+								{ "title": "Logout", "route": "logout" }
+							],
+							"icon_class": "fa fa-cog"
+						}
+					]
+				}
+			],
+
+			"pages": [
+				{ "name": "home_private", "title": "Welcome {{userFullName}}!" },
+				{ "name": "storyall", 
+					"title": "Stories",
+					"components": [
+						{
+							"name": "story",
+							"type": "custom_component",
+							"custom_template": "files/storycard-all.html",
+							"query_name" : "boards_open",
+							"query_params": []
+						}
+					],
+					
+					"pages": [
+						{ "name": "storyline", 
+							"route_params": ["boardId"],
+							"components": [
+								{
+									"name": "storytitle",
+									"type": "custom_component",
+									"custom_template": "files/storytitle.html",
+									"query_name" : "board_details_open",
+									"query_params": [
+										{ "name": "_id", "value": "this.params.boardId" }
+									]
+								},
+								{
+									"name": "storyline",
+									"type": "custom_component",
+									"custom_template": "files/storyline.html",
+									"query_name": "board_items_open",
+									"query_params": [
+										{ "name": "boardId", "value": "this.params.boardId" }
+									]
+								}
+							],
+							"template_rendered_code": "$('li.storyline-item:odd').addClass('storyline-inverted');"
+						}
+					]
+				},
+				{ "name": "storymy", 
+					"title": "Stories",
+					"components": [
+						{
+							"name": "story",
+							"type": "custom_component",
+							"custom_template": "files/storycard-my.html",
+							"query_name" : "boards",
+							"query_params": []
+						}
+					],
+					
+					"pages": [
+						{ "name": "storyline", 
+							"route_params": ["boardId"],
+							"components": [
+								{
+									"name": "storytitle",
+									"type": "custom_component",
+									"custom_template": "files/storytitle.html",
+									"query_name" : "board_details",
+									"query_params": [
+										{ "name": "_id", "value": "this.params.boardId" }
+									]
+								},
+								{
+									"name": "storyline",
+									"type": "custom_component",
+									"custom_template": "files/storyline.html",
+									"query_name": "board_items_open",
+									"query_params": [
+										{ "name": "boardId", "value": "this.params.boardId" }
+									]
+								}
+							],
+							"template_rendered_code": "$('li.storyline-item:odd').addClass('storyline-inverted');"
+						}
+					]
+				},
+
+				{ "name": "admin",
+					"roles": ["admin"],
+					"title": "Administration",
+
+					"components": [
+						{
+							"name": "side_menu",
+							"type": "menu",
+							"class": "nav nav-stacked nav-pills",
+							"items": [
+								{ "title": "Users", "route": "admin.users" },
+								{ "title": "Boards", "route": "boards" }
+							]
+						}
+					],
+					
+					"pages": [
+						{
+							"name": "users",
+							"components": [
+								{
+									"name": "view",
+									"type": "data_view",
+									"title": "Users",
+									"text_if_empty": "No users yet",
+									"query_name": "admin_users",
+									"query_params": [],
+
+									"fields": [
+										{ "name": "profile.name", "title": "Name"},
+										{ "name": "profile.email", "title": "E-mail" },
+										{ "name": "roles", "title": "Role" }
+									],
+
+									"insert_route": "admin.users.insert",
+
+									"edit_route": "admin.users.edit",
+									"edit_route_params": [
+										{ "name": "userId", "value": "this._id" }
+									],
+
+									"details_route": "admin.users.edit",
+									"details_route_params": [
+										{ "name": "userId", "value": "this._id" }
+									]
+								}
+							],
+							"pages": [
+								{
+									"name": "details",
+									"route_params": ["userId"],
+									"components": [
+										{
+											"name": "details_form",
+											"type": "form",
+											"mode": "read_only",
+											"title": "User details",
+											"query_name": "admin_user",
+											"query_params": [],
+											"fields": [
+												{ "name": "profile.name", "title": "Name"},
+												{ "name": "profile.email", "title": "E-mail", "type": "email" },
+												{ "name": "roles", "title": "Role" }
+											],
+											"close_route": "admin.users",
+											"back_route": "admin.users"
+										}
+									]
+								},
+								
+								{
+									"name": "insert",
+									"components": [
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "Add new user",
+											"submit_route": "admin.users",
+											"cancel_route": "admin.users",
+											"query_name": "users_null",
+											"query_params": [],
+											"fields": [
+												{ "name": "profile.name", "title": "Name", "required": true },
+												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+												{ "name": "password", "title": "Password", "input": "password", "required": true }
+											]
+										}
+									]
+								},
+								
+								{
+									"name": "edit",
+									"route_params": ["userId"],
+									
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "Edit user",
+											"submit_route": "admin.users",
+											"cancel_route": "admin.users",
+											"query_name": "admin_user",
+											"query_params": [],
+											"fields": [
+												{ "name": "profile.name", "title": "Name", "required": true },
+												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+												{
+													"name": "roles",
+													"type": "array",
+													"title": "Role",
+													"input": "radio",
+													"input_items": [
+														{ "value": "user", "title": "User" },
+														{ "value": "admin", "title": "Admin" },
+														{ "value": "blocked", "title": "Blocked" }
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+
+					]
+				},
+
+				{
+					"name": "boards",
+					"components": [
+						{
+							"name": "view",
+							"type": "data_view",
+							"title": "Storyboards",
+							"text_if_empty": "No storyboards :(",
+
+							"query_name": "boards",
+							"query_params": [],
+
+							"insert_route": "boards.insert",
+							"edit_route": "boards.edit",
+							"edit_route_params": [
+								{ "name": "boardId", "value": "this._id" }
+							],
+							"details_route": "boards.details",
+							"details_route_params": [
+								{ "name": "boardId", "value": "this._id" }
+							]
+						}
+					],
+					"pages": [
+						{
+							"name": "insert",
+							"components": [
+								{
+									"name": "insert_form",
+									"type": "form",
+									"mode": "insert",
+									"title": "New storyboard",
+									"class": "form-horizontal",
+
+									"query_name": "boards_empty",
+									"query_params": [],
+
+									"submit_route": "boards",
+									"cancel_route": "boards"
+								}
+							]
+						},
+
+						{
+							"name": "edit",
+							"route_params": ["boardId"],
+							"components": [
+								{
+									"name": "edit_form",
+									"type": "form",
+									"mode": "update",
+									"title": "Edit storyboard",
+									"submit_route": "boards",
+									"cancel_route": "boards",
+
+									"query_name": "board_details",
+									"query_params": []
+								}
+							]
+						},
+						
+						{
+							"name": "details",
+							"template": "page_subcontent_tabnav",
+							"route_params": ["boardId"],
+							"components": [
+								{
+									"name": "details_form",
+									"type": "custom_component",
+									"custom_template": "files/storytitle.html",
+									"query_name" : "board_details",
+								}
+							],
+
+							"force_yield_subpages": true,
+							"pages": [
+								{
+									"name": "items",
+									"components": [
+										{
+											"name": "view",
+											"type": "data_view",
+											"text_if_empty": "No items :(",
+											"query_name": "board_items",
+											"insert_button_title": "Add item",
+											"insert_route": "boards.details.insert",
+											"insert_route_params": [
+												{ "name": "boardId", "value": "this.params.boardId" }
+											],
+											"edit_route": "boards.details.edit",
+											"edit_route_params": [
+												{ "name": "boardId", "value": "UI._parentData(1).params.boardId" },
+												{ "name": "itemId", "value": "this._id" }
+											]
+										}
+									]
+								},
+
+								{
+									"name": "insert",
+									"components": [										
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "Add item",
+											"query_name": "board_items_empty",
+
+											"hidden_fields": [
+												{ "name": "boardId", "value": "this.params.boardId" }
+											],
+
+											"submit_route": "boards.details",
+											"submit_route_params": [
+												{ "name": "boardId", "value": "this.params.boardId"}
+											],
+											"cancel_route": "boards.details",
+											"cancel_route_params": [
+												{ "name": "boardId", "value": "this.params.boardId"}
+											]
+										}
+									]
+								},
+
+								{
+									"name": "edit",
+									"route_params": ["itemId"],
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "Edit item",
+											"query_name": "board_item",
+											"submit_route": "boards.details",
+											"submit_route_params": [
+												{ "name": "boardId", "value": "this.params.boardId"}
+											],
+											"cancel_route": "boards.details",
+											"cancel_route_params": [
+												{ "name": "boardId", "value": "this.params.boardId"}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				
+				{
+					"name": "user_settings",
+					"roles": ["user", "admin"],
+
+					"components": [
+						{
+							"name": "side_menu",
+							"type": "menu",
+							"class": "nav nav-stacked nav-pills",
+							"items": [
+								{ "title": "Profile", "route": "user_settings.profile" },
+								{ "title": "Change password", "route": "user_settings.change_pass" }
+							]
+						}
+					],
+
+					"pages": [
+						{
+							"name": "profile",
+							
+							"components": [
+								{
+									"name": "edit_form",
+									"type": "form",
+									"mode": "update",
+									"title": "Edit your profile",
+									"submit_route": "user_settings.profile",
+									"query_name": "current_user_data",
+									"query_params": [],
+									"fields": [
+										{ "name": "profile.name", "title": "Name", "required": true },
+										{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+										{ "name": "profile.facebook", "title": "Facebook URL" },
+										{ "name": "profile.google", "title": "Google+ URL" },
+										{ "name": "profile.twitter", "title": "Twitter ID" },
+										{ "name": "profile.website", "title": "Website URL" }
+									]
+								}
+							]
+						},
+
+						{ "name": "change_pass", "template": "change_pass" }
+					]
+				},
+
+				{ "name": "logout", "template": "logout" }
+			]
+		}
+	}
+}
