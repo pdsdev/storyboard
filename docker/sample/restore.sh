@@ -1,1 +1,0 @@
-mongorestore --db storyboard storyboard
