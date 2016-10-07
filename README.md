@@ -32,7 +32,7 @@ The project source and tools used to build the app are very portable. However, a
 
 2. Load some sample storyboard data
    ````
-   cd /home/project/docker/sample
+   cd /home/project/sample
    ./restore.sh
   ````
 
