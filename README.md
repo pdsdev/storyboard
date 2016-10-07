@@ -103,9 +103,17 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Todd King** - *Initial work* - [UCLA](https://github.com/toddking)
+- **Todd King** - *Initial work* - [UCLA](https://github.com/toddking)
 
 See also the list of [contributors](https://github.com/pdsdev/storyboard/contributors) who participated in this project.
+
+## History
+- The Storyboard concept was first described by Todd King in the late summer of 2015.
+- The idea was presented to NASA's tournament lab by Ed Grayzeck in the late summer of 2015.
+- NASA's Tournament lab accepted it as a challenge.
+- Aspirio coordinated the challenge and by late fall 2015 a working prototype was delivered.
+- The prototype was re-engineered and revised in early 2016 by Todd King.
+- THe project became on open source project early fall of 2016.
 
 ## License
 
@@ -113,4 +121,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to [Petar Korponaić](https://github.com/perak) for [Meteor Kitchen](http://www.meteorkitchen.com "Meteor Kitchen") and the great examples.
+- The development of Storyboard was sponsored by [NASA](http://nasa.gov "NASA").
+- Hat tip to [Petar Korponaić](https://github.com/perak) for [Meteor Kitchen](http://www.meteorkitchen.com "Meteor Kitchen") and the great examples.
