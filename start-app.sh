@@ -6,11 +6,15 @@
 # Defines configurable attribubes
 source app.config
 
-echo "APP_PORT: $APP_PORT"
-echo "APP_ROOT: $APP_ROOT"
 
 export MONGO_URL=mongodb://localhost:27017/$APP_ROOT
 export ROOT_URL=http://localhost:$APP_PORT/$APP_ROOT
+
+echo "APP_PORT: $APP_PORT"
+echo "APP_ROOT: $APP_ROOT"
+echo "MONGO_URL: $MONGO_URL"
+echo "ROOT_URL: $ROOT_URL"
+
 cd app
 meteor --port $APP_PORT
 

@@ -1,6 +1,13 @@
 <template name="TEMPLATE_NAME">
 
 <div class="storytitle">
+	{{#if canEdit QUERY_NAME.ownerId}}
+		<div class="pull-right">
+			<button id="edit" data="{{QUERY_NAME._id}}">
+				Edit
+			</button>
+		</div>
+	{{/if}}
 	<h2>{{QUERY_NAME.title}}</h2>
 	<p>{{QUERY_NAME.description}}</p>
 </div>

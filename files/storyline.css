@@ -72,6 +72,18 @@
     border-bottom: 14px solid transparent;
     content:" ";
 }
+.storyline-panel-edit {
+	vertical-align: top;
+    margin-left: calc(100vw/2);
+    width: calc(100vw/2);
+}
+.storyline-panel-edit table {
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+.storyline-panel-edit td {
+    vertical-align: top;
+}
 .storyline > li > .storyline-badge {
     color: #ffffff;
     width: 50px;

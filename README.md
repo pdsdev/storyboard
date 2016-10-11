@@ -111,9 +111,9 @@ See also the list of [contributors](https://github.com/pdsdev/storyboard/contrib
 - The Storyboard concept was first described by Todd King in the late summer of 2015.
 - The idea was presented to NASA's tournament lab by Ed Grayzeck in the late summer of 2015.
 - NASA's Tournament lab accepted it as a challenge.
-- Aspirio coordinated the challenge and by late fall 2015 a working prototype was delivered.
+- Topcoder (now part of Aspirio) coordinated the challenge and by late fall 2015 a working prototype was delivered. The challenge was lead by Ambi Del Villar.
 - The prototype was re-engineered and revised in early 2016 by Todd King.
-- THe project became on open source project early fall of 2016.
+- The project became on open source project early fall of 2016.
 
 ## License
 

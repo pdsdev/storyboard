@@ -9,6 +9,10 @@
 		"roles": [ "admin", "user" ],
 		"default_role": "user",
 		"send_verification_email": true,
+		
+		"packages": {
+			"meteor": [ "mrt:jquery-ui" ]
+		},
 
 		"server_startup_source_file": "files/startup.js",
 		
@@ -164,29 +168,7 @@
 			],
 			
 			"pages": [
-				{
-					"name": "home_public",
-					"title": "",
-					"components": [
-						{
-							"name": "jumbotron",
-							"type": "jumbotron",
-							"dest_position": "before",
-
-							"image_url": "images/jumbotron-bg.jpg",
-
-							"components": [
-								{
-									"name": "jumbotron_content",
-									"type": "custom_component",
-									"custom_template": "files/jumbotron_content.html"
-								}
-							]
-						}
-					],
-			
-					"template_rendered_code": "$('section, .jumbotron').css('min-height', $(window).height() + 'px'); window.scrollTo(0, 0);"
-				},
+				{ "name": "home_public", "title" : "", "custom_template" : "files/home_public.html" },
 				{ "name": "story", 
 					"title": "Stories",
 					"components": [
@@ -225,7 +207,8 @@
 							"template_rendered_code": "$('li.storyline-item:odd').addClass('storyline-inverted');"
 						}
 					]
-				},				
+				},
+				
 				{ "name": "about", "title": "About",
 					"components": [
 						{
@@ -346,7 +329,7 @@
 									"name": "storytitle",
 									"type": "custom_component",
 									"custom_template": "files/storytitle.html",
-									"query_name" : "board_details",
+									"query_name" : "board_details_open",
 									"query_params": [
 										{ "name": "_id", "value": "this.params.boardId" }
 									]
@@ -365,135 +348,30 @@
 						}
 					]
 				},
-
-				{ "name": "admin",
-					"roles": ["admin"],
-					"title": "Administration",
-
-					"components": [
-						{
-							"name": "side_menu",
-							"type": "menu",
-							"class": "nav nav-stacked nav-pills",
-							"items": [
-								{ "title": "Users", "route": "admin.users" },
-								{ "title": "Boards", "route": "boards" }
-							]
-						}
-					],
-					
-					"pages": [
-						{
-							"name": "users",
+				
+				{ "name": "edit", 
+							"route_params": ["boardId"],
 							"components": [
 								{
-									"name": "view",
-									"type": "data_view",
-									"title": "Users",
-									"text_if_empty": "No users yet",
-									"query_name": "admin_users",
-									"query_params": [],
-
-									"fields": [
-										{ "name": "profile.name", "title": "Name"},
-										{ "name": "profile.email", "title": "E-mail" },
-										{ "name": "roles", "title": "Role" }
-									],
-
-									"insert_route": "admin.users.insert",
-
-									"edit_route": "admin.users.edit",
-									"edit_route_params": [
-										{ "name": "userId", "value": "this._id" }
-									],
-
-									"details_route": "admin.users.edit",
-									"details_route_params": [
-										{ "name": "userId", "value": "this._id" }
-									]
-								}
-							],
-							"pages": [
-								{
-									"name": "details",
-									"route_params": ["userId"],
-									"components": [
-										{
-											"name": "details_form",
-											"type": "form",
-											"mode": "read_only",
-											"title": "User details",
-											"query_name": "admin_user",
-											"query_params": [],
-											"fields": [
-												{ "name": "profile.name", "title": "Name"},
-												{ "name": "profile.email", "title": "E-mail", "type": "email" },
-												{ "name": "roles", "title": "Role" }
-											],
-											"close_route": "admin.users",
-											"back_route": "admin.users"
-										}
+									"name": "edittitle",
+									"type": "custom_component",
+									"custom_template": "files/edittitle.html",
+									"query_name" : "board_details_open",
+									"query_params": [
+										{ "name": "_id", "value": "this.params.boardId" }
 									]
 								},
-								
 								{
-									"name": "insert",
-									"components": [
-										{
-											"name": "insert_form",
-											"type": "form",
-											"mode": "insert",
-											"title": "Add new user",
-											"submit_route": "admin.users",
-											"cancel_route": "admin.users",
-											"query_name": "users_null",
-											"query_params": [],
-											"fields": [
-												{ "name": "profile.name", "title": "Name", "required": true },
-												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
-												{ "name": "password", "title": "Password", "input": "password", "required": true }
-											]
-										}
-									]
-								},
-								
-								{
-									"name": "edit",
-									"route_params": ["userId"],
-									
-									"components": [
-										{
-											"name": "edit_form",
-											"type": "form",
-											"mode": "update",
-											"title": "Edit user",
-											"submit_route": "admin.users",
-											"cancel_route": "admin.users",
-											"query_name": "admin_user",
-											"query_params": [],
-											"fields": [
-												{ "name": "profile.name", "title": "Name", "required": true },
-												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
-												{
-													"name": "roles",
-													"type": "array",
-													"title": "Role",
-													"input": "radio",
-													"input_items": [
-														{ "value": "user", "title": "User" },
-														{ "value": "admin", "title": "Admin" },
-														{ "value": "blocked", "title": "Blocked" }
-													]
-												}
-											]
-										}
+									"name": "editline",
+									"type": "custom_component",
+									"custom_template": "files/editline.html",
+									"query_name": "board_items_open",
+									"query_params": [
+										{ "name": "boardId", "value": "this.params.boardId" }
 									]
 								}
 							]
-						}
-
-					]
-				},
+				},				
 
 				{
 					"name": "boards",
@@ -645,6 +523,136 @@
 					]
 				},
 				
+				{ "name": "admin",
+					"roles": ["admin"],
+					"title": "Administration",
+
+					"components": [
+						{
+							"name": "side_menu",
+							"type": "menu",
+							"class": "nav nav-stacked nav-pills",
+							"items": [
+								{ "title": "Users", "route": "admin.users" },
+								{ "title": "Boards", "route": "boards" }
+							]
+						}
+					],
+					
+					"pages": [
+						{
+							"name": "users",
+							"components": [
+								{
+									"name": "view",
+									"type": "data_view",
+									"title": "Users",
+									"text_if_empty": "No users yet",
+									"query_name": "admin_users",
+									"query_params": [],
+
+									"fields": [
+										{ "name": "profile.name", "title": "Name"},
+										{ "name": "profile.email", "title": "E-mail" },
+										{ "name": "roles", "title": "Role" }
+									],
+
+									"insert_route": "admin.users.insert",
+
+									"edit_route": "admin.users.edit",
+									"edit_route_params": [
+										{ "name": "userId", "value": "this._id" }
+									],
+
+									"details_route": "admin.users.edit",
+									"details_route_params": [
+										{ "name": "userId", "value": "this._id" }
+									]
+								}
+							],
+							"pages": [
+								{
+									"name": "details",
+									"route_params": ["userId"],
+									"components": [
+										{
+											"name": "details_form",
+											"type": "form",
+											"mode": "read_only",
+											"title": "User details",
+											"query_name": "admin_user",
+											"query_params": [],
+											"fields": [
+												{ "name": "profile.name", "title": "Name"},
+												{ "name": "profile.email", "title": "E-mail", "type": "email" },
+												{ "name": "roles", "title": "Role" }
+											],
+											"close_route": "admin.users",
+											"back_route": "admin.users"
+										}
+									]
+								},
+								
+								{
+									"name": "insert",
+									"components": [
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "Add new user",
+											"submit_route": "admin.users",
+											"cancel_route": "admin.users",
+											"query_name": "users_null",
+											"query_params": [],
+											"fields": [
+												{ "name": "profile.name", "title": "Name", "required": true },
+												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+												{ "name": "password", "title": "Password", "input": "password", "required": true }
+											]
+										}
+									]
+								},
+								
+								{
+									"name": "edit",
+									"route_params": ["userId"],
+									
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "Edit user",
+											"submit_route": "admin.users",
+											"cancel_route": "admin.users",
+											"query_name": "admin_user",
+											"query_params": [],
+											"fields": [
+												{ "name": "profile.name", "title": "Name", "required": true },
+												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+												{
+													"name": "roles",
+													"type": "array",
+													"title": "Role",
+													"input": "radio",
+													"input_items": [
+														{ "value": "user", "title": "User" },
+														{ "value": "admin", "title": "Admin" },
+														{ "value": "blocked", "title": "Blocked" }
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+
+					]
+				},
+
+
 				{
 					"name": "user_settings",
 					"roles": ["user", "admin"],
