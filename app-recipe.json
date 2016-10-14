@@ -18,9 +18,7 @@
 		
 		"copy_files": [
 			{ "source": "files/styles.css", "dest": "CLIENT_STYLES_DIR/styles.css" },
-			{ "source": "files/storyline.css", "dest": "CLIENT_STYLES_DIR/storyline.css" },
-			{ "source": "files/storytitle.css", "dest": "CLIENT_STYLES_DIR/storytitle.css" },
-			{ "source": "files/storycard.css", "dest": "CLIENT_STYLES_DIR/storycard.css" },
+			{ "source": "files/storyboard.css", "dest": "CLIENT_STYLES_DIR/storyboard.css" },
 			{ "source": "files/jumbotron-bg.jpg", "dest": "PUBLIC_IMAGES_DIR/jumbotron-bg.jpg" }
 		],
 		
@@ -175,7 +173,7 @@
 						{
 							"name": "story",
 							"type": "custom_component",
-							"custom_template": "files/storycard.html",
+							"custom_template": "files/storycover.html",
 							"query_name" : "boards_open",
 							"query_params": []
 						}
@@ -276,7 +274,7 @@
 						{
 							"name": "story",
 							"type": "custom_component",
-							"custom_template": "files/storycard-all.html",
+							"custom_template": "files/storycover-all.html",
 							"query_name" : "boards_open",
 							"query_params": []
 						}
@@ -315,7 +313,7 @@
 						{
 							"name": "story",
 							"type": "custom_component",
-							"custom_template": "files/storycard-my.html",
+							"custom_template": "files/storycover-my.html",
 							"query_name" : "boards",
 							"query_params": []
 						}
@@ -350,27 +348,33 @@
 				},
 				
 				{ "name": "edit", 
-							"route_params": ["boardId"],
-							"components": [
-								{
-									"name": "edittitle",
-									"type": "custom_component",
-									"custom_template": "files/edittitle.html",
-									"query_name" : "board_details_open",
-									"query_params": [
-										{ "name": "_id", "value": "this.params.boardId" }
-									]
-								},
-								{
-									"name": "editline",
-									"type": "custom_component",
-									"custom_template": "files/editline.html",
-									"query_name": "board_items_open",
-									"query_params": [
-										{ "name": "boardId", "value": "this.params.boardId" }
-									]
-								}
-							]
+						"route_params": ["boardId"],
+						"components": [
+							{
+								"name": "edittitle",
+								"type": "custom_component",
+								"custom_template": "files/edittitle.html",
+								"query_name" : "board_details_open",
+								"query_params": [
+									{ "name": "_id", "value": "this.params.boardId" }
+								]
+							},
+							{
+								"name": "editline",
+								"type": "custom_component",
+								"custom_template": "files/editline.html",
+								"query_name": "board_items_open",
+								"query_params": [
+									{ "name": "boardId", "value": "this.params.boardId" }
+								]
+							}
+						],
+						"pages": [
+							{
+								"name": "card",
+								"custom_template": "files/editcard.html"
+							}
+						]
 				},				
 
 				{

@@ -3,9 +3,7 @@
 <div class="storytitle">
 	{{#if canEdit QUERY_NAME.ownerId}}
 		<div class="pull-right">
-			<button id="edit" data="{{QUERY_NAME._id}}">
-				Edit
-			</button>
+			<button id="edit" data="{{QUERY_NAME._id}}"><span class="fa fa-edit"></span>Edit</button>
 		</div>
 	{{/if}}
 	<h2>{{QUERY_NAME.title}}</h2>

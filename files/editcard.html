@@ -1,0 +1,35 @@
+<template name="TEMPLATE_NAME">
+
+   <li class="storyline-item">
+        <div class="storyline-badge cd-picture">
+          <i class="fa fa-newspaper-o"></i>
+        </div>
+        <div class="storyline-panel" data="{{delveURL}}">
+            <div class="storyline-heading">
+                <h4 name="title">{{title}}</h4>
+            </div>
+            <div class="storyline-body" data="{{delveURL}}">
+				<figure class="image {{hide imageURL}}">
+					<img id="figure-img" name="figure-img" src="{{imageURL}}" alt="{{title}}" data="{{delveURL}}">
+					<figcaption>{{imageCaption}}</figcaption>
+				</figure>
+				<div name="description" class="storyline-text">{{description}}</div>
+            </div>
+            <div class="storyline-footer">
+				<p name="delve" class="text-right {{hide delveURL}}"><span name="delve-button" id="delve-button" data="{{delveURL}}" title="Delve">Delve <i class="fa fa-external-link"></i></span></p>
+            </div>
+        </div>
+		<div class="storyline-panel-edit">
+			<table>
+				<tr><td>Title:</td><td><input name="title" type="text" size="60" value="{{title}}" /></td></tr>
+				<tr><td>Image URL:</td><td><input name="image-url" type="text" size="60" value="{{imageURL}}" /></td></tr>
+				<tr><td>Caption:</td><td><input name="caption" type="text" size="60" value="{{imageCaption}}" /></td></tr>
+				<tr><td>Delve URL:</td><td><input name="delve-url" type="text" size="60" value="{{delveURL}}" /></td></tr>
+				<tr><td>Description:</td><td><textarea name="description" rows="8" cols="60">{{description}}</textarea></td></tr>
+			</table>
+			<button name="remove"><span class="fa fa-remove"></span>Remove</button>
+		</div>
+
+    </li>
+
+</template>

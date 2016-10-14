@@ -2,11 +2,22 @@
 
 <div class="storytitle">
 	<div class="pull-right"> 
-		<button id="save" data="{{QUERY_NAME._id}}">Save</button>
-		<button id="cancel" data="{{QUERY_NAME._id}}">Cancel</button>
+		<button id="save" data="{{QUERY_NAME._id}}"><span class="fa fa-download"></span>Save</button>
+		<button id="cancel" data="{{QUERY_NAME._id}}"><span class="fa fa-minus-circle"></span>Cancel</button>
 	</div>
-	<h2 contenteditable="true">{{QUERY_NAME.title}}</h2>
-	<p  contenteditable="true">{{QUERY_NAME.description}}</p>
+		<h2><input name="story-title" type="text" size="60" placeholder="Enter a title" value="{{board_details_open.title}}" /></h2>
+		<div>
+			<div class="pull-left">
+				<p><textarea name="story-description" rows="3" cols="80" placeholder="Overview of the story">{{board_details_open.description}}</textarea></p>
+				<p><input name="story-image-url" type="text" size="78" placeholder="Enter an image URL" value="{{board_details_open.imageURL}}" /></p>
+			</div>
+			<div>
+				<figure class="image thumbnail">
+					<img id="story-img" name="story-img" src="{{board_details_open.imageURL}}">
+				</figure>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 </div>
 
 </template>

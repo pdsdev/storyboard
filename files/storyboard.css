@@ -1,4 +1,61 @@
 /* -----------------------------------------------
+ * storytitle
+ * --------------------------------------------- */
+.thumbnail {
+	width: 100px;
+	height: 100px
+}
+/* -----------------------------------------------
+ * storycard
+ * --------------------------------------------- */
+ .storycard {
+    list-style: none;
+    padding: 10px 5px;
+	margin: 20px 20px;
+    position: relative;
+	width: 450px;
+    font-weight: 300;
+    float: left;
+    border: 1px solid #dcdcdc;
+    background: #ffffff;
+}
+.storycard figure {
+	width: calc(100% - 25px);	/* subtract padding of parent */
+  }
+.storycard-badge {
+	float:right;
+}
+.storycard-title {
+    margin-top: 0;
+    color: inherit;
+}
+.storycard-heading h4 {
+    font-weight: 400;
+    padding: 0 15px;
+    color: #303E49;
+	font-weight: bold;
+}
+.storycard-body > p {
+    padding: 10px 15px;
+    margin-bottom: 0;
+}
+.storycard-footer {
+    padding: 5px 15px;
+    background-color:#f4f4f4;
+}
+.storycard-footer p { margin-bottom: 0; }
+.storycard-footer > a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    ul.storycard:before {
+        left: 40px;
+    }
+}
+
+/* -----------------------------------------------
  * storyline
  * --------------------------------------------- */
  .storyline {

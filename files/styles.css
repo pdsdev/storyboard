@@ -35,6 +35,15 @@ figure.image figcaption {
   margin-top: 8px;
 }
 
+.thumbnail {
+	width: 120px;
+	padding: 5px;
+}
+
+figure.thumbnail {
+  border: 1px solid white;
+}
+
 section {
 	padding: 0 0 80px 0;
 }

@@ -4,45 +4,18 @@
 {{#if getItems}}
    <ul id="storyline" class="storyline">
 	{{#each getItems}}
-    <li class="storyline-item">
-        <div class="storyline-badge cd-picture">
-          <i class="fa fa-newspaper-o"></i>
-        </div>
-        <div class="storyline-panel" data="{{delveURL}}">
-            <div class="storyline-heading">
-                <h4 contenteditable="true">{{title}}</h4>
-            </div>
-            <div class="storyline-body" data="{{delveURL}}">
-			   {{#if imageURL}}
-				<figure class="image">
-					<img id="figure-img" src="{{imageURL}}" alt="{{title}} data="{{delveURL}}"">
-					<figcaption>{{imageCaption}}</figcaption>
-				</figure>
-				{{/if}}
-				<div class="storyline-text" contenteditable="true">{{description}}</div>
-            </div>
-            <div class="storyline-footer">
-			   {{#if delveURL}}
-					<p class="text-right"><span id="delve-button" data="{{delveURL}}" title="Delve">Delve <i class="fa fa-external-link"></i></span></p>
-				{{/if}}
-            </div>
-        </div>
-		<div class="storyline-panel-edit">
-		<table>
-			<tr><td>Title:</td><td><input type="text" size="62" value="{{title}}" /></td></tr>
-			<tr><td>Image URL:</td><td><input type="text" size="62" value="{{imageURL}}" /></td></tr>
-			<tr><td>Caption:</td><td><input type="text" size="62" value="{{imageCaption}}" /></td></tr>
-			<tr><td>Delve URL:</td><td><input type="text" size="62" value="{{delveURL}}" /></td></tr>
-			<tr><td>Description:</td><td><textarea rows="8" cols="60">{{description}}</textarea></td></tr>
-		</table>
-		</div>
-
-    </li>
+		{{> EditCard}}
 	{{/each}}
-    <li class="clearfix no-float"></li>
+    <li class="clearfix no-float"></li> <!-- Controls the drawing of the time line -->
 	</ul>
+	<div class="pull-right"> 
+		<button name="new-item"><span class="fa fa-indent"></span>New Item</button>
+	</div>
 
 {{else}}
+	<div class="pull-right"> 
+		<button name="new-item"><span class="fa fa-indent"></span>New Item</button>
+	</div>
 	<div class="alert alert-info">
 		This story is empty. :(
 	</div>

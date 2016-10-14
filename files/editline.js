@@ -7,6 +7,7 @@ Template.TEMPLATE_NAME.rendered = function() {
 		// placeholder: "ui-state-highlight",
 		tolerance: "pointer",
 		revert: true,
+		/*
         update: function(e, ui) {
 			console.log("Ready to scan");
 		},
@@ -29,6 +30,7 @@ Template.TEMPLATE_NAME.rendered = function() {
 				console.log("item[" + i + "]: " + Blaze.getData(el).step + "; " + Blaze.getData(el).title);
 			});
 		}
+		*/
 	
     } )
 
@@ -38,40 +40,16 @@ Template.TEMPLATE_NAME.events({
 	"click .storyline-item": function(e, t) {
 		e.preventDefault();
 		Blaze.getData(e.target)
-		alert('Click item');
+		// alert('Click item');
 		console.dir(Blaze.getData(e.target));
 		return false;
 	},
-	/*
-	"click .storyline-heading": function(e, t) {
-		e.preventDefault();
-		p = $(e.target).closest(".storyline-panel");
-		if(p) { 
-			url = $(p).attr("data");
-			if(url) { window.open(url); } // Router.go("boards.edit", {boardId: this._id});
-		}
-		return false;
-	},
-	"click .storyline-body": function(e, t) {
-		e.preventDefault();
-		p = $(e.target).closest(".storyline-panel");
-		if(p) { 
-			url = $(p).attr("data");
-			if(url) { window.open(url); } // Router.go("boards.edit", {boardId: this._id});
-		}
-		
-		return false;
-	},
-	"click .storyline-footer": function(e, t) {
-		e.preventDefault();
-		p = $(e.target).closest(".storyline-panel");
-		if(p) { 
-			url = $(p).attr("data");
-			if(url) { window.open(url); } // Router.go("boards.edit", {boardId: this._id});
-		}
+	'click [name="new-item"]': function(e, t) {
+		Blaze.renderWithData(Template.EditCard, 
+			{title: "", imageURL: "#", imageCaption: "", delveURL: "", description: ""},
+			$('#storyline')[0], $('#storyline li').last()[0]);	// [0] is the element in the DOM
 		return false;
 	}
-	*/
 });
 
 Template.TEMPLATE_NAME.helpers({
