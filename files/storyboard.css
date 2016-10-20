@@ -8,7 +8,7 @@
 /* -----------------------------------------------
  * storycard
  * --------------------------------------------- */
- .storycard {
+.storycard {
     list-style: none;
     padding: 10px 5px;
 	margin: 20px 20px;
@@ -73,10 +73,34 @@
     background: #999999;
     left: 50%;
     margin-left: -2.5px;
- }
- .storyline figure {
+}
+ .storyline-text table tr {
+	border-bottom: solid thin;
+}
+.storyline-text table tr:first-child {
+	border-top: solid thin;
+}
+.storyline-text table th {
+	background: #EEEEEE;
+	padding-left: 4px;
+	padding-right: 4px;
+	text-align: center;
+    border-right: solid thin;
+}
+.storyline-text table th:first-child {
+     border-left: solid thin;
+}
+.storyline-text table td {
+	padding-left: 4px;
+	padding-right: 4px;
+    border-right: solid thin;
+}
+.storyline-text table td:first-child {
+     border-left: solid thin;
+}
+.storyline figure {
 	width: calc(100% - 25px);	/* subtract padding of parent */
-  }
+}
 .storyline > li {
     margin-bottom: 60px;
     position: relative;
@@ -229,7 +253,7 @@
     float: right;
     clear: right;
 }
-.storyline > li:nth-child(2) {
+.storyline > li:nth-child(even) {
     margin-top: 60px;
 }
 .storyline > li.storyline-inverted > .storyline-badge {

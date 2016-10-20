@@ -13,7 +13,7 @@
 					<img id="figure-img" name="figure-img" src="{{imageURL}}" alt="{{title}}" data="{{delveURL}}">
 					<figcaption>{{imageCaption}}</figcaption>
 				</figure>
-				<div name="description" class="storyline-text">{{description}}</div>
+				<div name="description" class="storyline-text">{{#markdown}}{{description}}{{/markdown}}</div>
             </div>
             <div class="storyline-footer">
 				<p name="delve" class="text-right {{hide delveURL}}"><span name="delve-button" id="delve-button" data="{{delveURL}}" title="Delve">Delve <i class="fa fa-external-link"></i></span></p>

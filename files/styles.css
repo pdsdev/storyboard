@@ -14,6 +14,9 @@
 	color: yellow;
 }
 
+.dragover {
+	background-color: grey;
+}
 figure.image {
   display: inline-block;
   
@@ -38,6 +41,13 @@ figure.image figcaption {
 .thumbnail {
 	width: 120px;
 	padding: 5px;
+}
+
+.fixed-right {
+	position: fixed;
+	right: 10px;
+	margin-top: 8px;
+	z-index: 100;
 }
 
 figure.thumbnail {

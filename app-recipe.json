@@ -11,7 +11,7 @@
 		"send_verification_email": true,
 		
 		"packages": {
-			"meteor": [ "mrt:jquery-ui" ]
+			"meteor": [ "mrt:jquery-ui", "perak:markdown" ]
 		},
 
 		"server_startup_source_file": "files/startup.js",
@@ -211,8 +211,8 @@
 					"components": [
 						{
 							"name": "about_content",
-							"type": "markdown",
-							"source_file": "files/about.md"
+							"type": "custom_component",
+							"source_file": "files/about.html"
 						},
 
 						{

@@ -19,7 +19,7 @@
 					<figcaption>{{imageCaption}}</figcaption>
 				</figure>
 				{{/if}}
-				<div class="storyline-text">{{description}}</div>
+				<div class="storyline-text">{{#markdown}}{{description}}{{/markdown}}</div>
             </div>
             <div class="storyline-footer">
 			   {{#if delveURL}}

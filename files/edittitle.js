@@ -7,13 +7,24 @@ Template.TEMPLATE_NAME.events({
 		if (e.which === 13) {
 			var value = e.target.value;
 			var item = $('#story-img');
-			if(item) {
-				var current = $(item).attr("src");
-				if(current != value) {	// Change value
-					$(item).attr("src", value);
-				}
-			}
+			setStoryImageURL(item, value);
 		}
+	},
+	'dragover input[name="story-image-url"]' : function(e, t) {
+		e.preventDefault(); 
+		$(e.currentTarget).addClass('dragover');
+	},
+	'dragleave input[name="story-image-url"]' : function(e, t) {
+		$(e.currentTarget).removeClass('dragover');
+	},
+	'drop input[name="story-image-url"]': function (e, t) {
+		e.preventDefault();
+		$(e.target).removeClass('dragover');
+		var value = e.originalEvent.dataTransfer.getData("text");
+		$(e.target).val(value);
+		// Set story image
+		var item = $('#story-img');
+		setStoryImageURL(item, value);
 	},
 	"click #cancel": function(e, t) {
 		e.preventDefault();
@@ -44,11 +55,11 @@ Template.TEMPLATE_NAME.events({
 			if(data) cardId = data._id;
 			card = { 
 				step: i+1,
-				title: $(el).find('h4').text().trim(),
-				imageURL: $(el).find('[name="figure-img"]').attr('src'),
-				imageCaption: $(el).find('figcaption').text().trim(),
-				description: $(el).find('[name="description"]').text().trim(),
-				delveURL: $(el).find('[name="delve-button"]').attr('data')
+				title: data.title, // $(el).find('h4').text().trim(),
+				imageURL: data.imageURL, // $(el).find('[name="figure-img"]').attr('src'),
+				imageCaption: data.caption, // $(el).find('figcaption').text().trim(),
+				description: data.description, // $(el).find('[name="description"]').text().trim(),
+				delveURL: data.delveURL, // $(el).find('[name="delve-button"]').attr('data')
 			}
 			cards.push({ 
 				cardId: cardId,
@@ -84,3 +95,14 @@ Template.TEMPLATE_NAME.events({
 
 Template.TEMPLATE_NAME.helpers({
 });
+
+// Re-usable functions
+// Set StoryImageURL
+var setStoryImageURL = function(item, value) {
+	if(item) {
+		var current = $(item).attr("src");
+		if(current != value) {	// Change value
+			$(item).attr("src", value);
+		}
+	}	
+}
