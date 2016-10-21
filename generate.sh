@@ -1,6 +1,12 @@
 #!/bin/bash
 /usr/local/bin/meteor-kitchen app-recipe.json app
 
+# After the first time the app is built Meteor Kitchen leaves behind a 
+# generic main.* page which needs to be removed.
+if [ -f app/client/main.html ]; then
+   rm -f app/client/main.*
+fi
+
 # Defines configurable attribubes
 source app.config
 

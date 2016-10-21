@@ -19,40 +19,43 @@ These instructions will get you a copy of the project up and running on your loc
 - **app-recipe.json**: The specification of the app in Meteor Kitchen API.
 - **files**: Folder containing templates, helper code, and other resources. 
 - **docker**: Contains files to create a Docker container.
-- **sample**: A MongoDB containing sample storyboards.  
+- **sample**: A MongoDB containing sample storyboards. 
+- **process.json**:  A PM2 process definition file.
+- **generate.sh**: A script to generate the Meteor app.
+- **deploy.sh**: A script to build a deployable app package.
  
 ### Installing
 
-The project source and tools used to build the app are very portable. However, a Linux or OSX platform is the preferred platform. 
+The project source and tools used to generate the app are very portable. However, a Linux or OSX platform is the preferred platform. 
 
 1. Run MongoDB (it should start automatically, but doesn't always)
-   ````
+   ```
    service mongodb restart
-   ````
+   ```
 
 2. Load some sample storyboard data
-   ````
+   ```
    cd /home/project/sample
    ./restore.sh
-  ````
+  ```
 
-3. Build the app
-   ````
+3. Generate the app
+   ```
    cd /home/project
-   ./build.sh
-   ````
+   ./generate.sh
+   ```
 
 4. Run the app
-   ````
+   ```
    ./start-app.sh
-   ````
+   ```
 
 5. Direct your browser to 
-   ````
+   ```
    http://localhost:3000/storyboard
-   ````
+   ```
 
-While the app is running, each time you do a build the  app will automatically update. Part of the Meteor magic.
+While the app is running, each time you generate the app the web pages it will automatically update. Part of the Meteor magic.
 
 To do development on a Windows platform or on virtual machines you can create a Docker container. A Dockerfile to to do Meteor Kitchen based developed is included with this project in the "docker" folder. 
 
@@ -68,16 +71,16 @@ To do development on a Windows platform or on virtual machines you can create a 
 
 2. Create a container (running instance) of the image. 
 
-   ````
+   ```
    docker run -d -p 3000:3000 -v /local/project:/home/project -t storyboard storyboard
-   ````
+   ```
 
    Note: "/local/project" is the path to Storyboard project files (where you cloned this Git repository).
 
 3. Connect the storyboard container
-   ````
+   ```
    docker exec -i -t storyboard /bin/bash
-   ````
+   ```
 
 Then do the project installation above.
 
@@ -92,10 +95,16 @@ You should change the admin password.
 ## Deployment
 
 To deploy a Meteor app you need to package the entire app with the ```meteor build```. A script is available to make this easier. Run
-````
+```
 ./deploy.sh
-````
+```
 This will create a production version of the app in the bundle/programs/server and can be run with node.js.
+
+After creating a production version you can run the app using [PM2](http://pm2.keymetrics.io/) with the command:
+```
+pm2 start process.json
+```
+You will want to change the "ROOT_URL" in the "process.json" file to reflect the URL where you want the Storyboard to be accesed.  
 
 ## Versioning
 
