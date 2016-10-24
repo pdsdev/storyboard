@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "storyboard",
-      "script": "./build/bundle/main.js",
+      "script": "./deploy/bundle/main.js",
       "log_date_format": "YYYY-MM-DD",
       "exec_mode": "fork_mode",
       "env": {
