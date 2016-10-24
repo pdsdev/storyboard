@@ -158,7 +158,7 @@
 					"class": "nav navbar-nav navbar-right",
 					"scroll_spy_selector": "body",
 					"items": [
-						{ "title": "About", "url": "about" },
+						{ "title": "About", "route": "about" },
 						{ "title": "Register", "route": "register" },
 						{ "title": "Login", "route": "login" }
 					]
@@ -212,13 +212,13 @@
 						{
 							"name": "about_content",
 							"type": "custom_component",
-							"source_file": "files/about.html"
+							"custom_template": "files/about.html"
 						},
 
 						{
-							"name": "three_columns",
+							"name": "about_uses",
 							"type": "custom_component",
-							"custom_template": "files/three_columns.html"
+							"custom_template": "files/about_uses.html"
 						}
 					]
 				},

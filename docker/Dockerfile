@@ -10,5 +10,5 @@ RUN curl http://www.meteorkitchen.com/install | /bin/sh
 RUN curl https://install.meteor.com/ | sh
 RUN echo "Finalizing...."
 EXPOSE 3000
-RUN mkdir /home/app
-VOLUME /home/app
+RUN mkdir /home/project
+VOLUME /home/project
