@@ -158,22 +158,22 @@
 					"class": "nav navbar-nav navbar-right",
 					"scroll_spy_selector": "body",
 					"items": [
-						{ "title": "About", "route": "about" },
-						{ "title": "Register", "route": "register" },
-						{ "title": "Login", "route": "login" }
+						{ "title": "About", "route": "about", "icon_class": "fa fa-caret-down" },
+						{ "title": "Register", "route": "register", "icon_class": "fa fa-pencil-square-o" },
+						{ "title": "Login", "route": "login", "icon_class": "fa fa-sign-in" }
 					]
 				}
 			],
 			
 			"pages": [
-				{ "name": "home_public", "title" : "", "custom_template" : "files/home_public.html" },
+				{ "name": "home_public", "title" : "", "custom_template" : "files/home-public.html" },
 				{ "name": "story", 
 					"title": "Stories",
 					"components": [
 						{
 							"name": "story",
 							"type": "custom_component",
-							"custom_template": "files/storycover.html",
+							"custom_template": "files/story-cover.html",
 							"query_name" : "boards_open",
 							"query_params": []
 						}
@@ -186,7 +186,7 @@
 								{
 									"name": "storytitle",
 									"type": "custom_component",
-									"custom_template": "files/storytitle.html",
+									"custom_template": "files/story-title.html",
 									"query_name" : "board_details_open",
 									"query_params": [
 										{ "name": "_id", "value": "this.params.boardId" }
@@ -195,7 +195,7 @@
 								{
 									"name": "storyline",
 									"type": "custom_component",
-									"custom_template": "files/storyline.html",
+									"custom_template": "files/story-line.html",
 									"query_name": "board_items_open",
 									"query_params": [
 										{ "name": "boardId", "value": "this.params.boardId" }
@@ -219,7 +219,7 @@
 								{
 									"name": "storyslide",
 									"type": "custom_component",
-									"custom_template": "files/storyslide.html",
+									"custom_template": "files/story-slide.html",
 									"query_name": "board_items_open",
 									"query_params": [
 										{ "name": "boardId", "value": "this.params.boardId" }
@@ -242,11 +242,11 @@
 						{
 							"name": "about_uses",
 							"type": "custom_component",
-							"custom_template": "files/about_uses.html"
+							"custom_template": "files/about-uses.html"
 						}
 					]
 				},
-				{ "name": "login", "template": "login" },
+				{ "name": "login", "custom_template": "files/login.html" },
 				{ "name": "register", "template": "register" },
 				{ "name": "verify_email", "template": "verify_email", "route_params": ["verifyEmailToken"] },
 				{ "name": "forgot_password", "template": "forgot_password" },
@@ -256,7 +256,7 @@
 		},
 
 		"private_zone": {
-
+			"default_route": "welcome",
 			"components": [
 				{
 					"name": "left_menu",
@@ -264,9 +264,9 @@
 					"class": "nav navbar-nav",
 					"dest_selector": "#menu",
 					"items": [
-						{ "title": "Home", "route": "home_private", "icon_class": "fa fa-home" },
-						{ "title": "Stories", "route": "storyall", "icon_class": "fa fa-book" },
-						{ "title": "MyStories", "route": "my", "icon_class": "fa fa-map-o" }
+						{ "title": "Home", "route": "welcome", "icon_class": "fa fa-home" },
+						{ "title": "Stories", "route": "story", "icon_class": "fa fa-book" },
+						{ "title": "MyStories", "route": "mystory", "icon_class": "fa fa-map-o" }
 					]
 				},
 				{
@@ -277,7 +277,7 @@
 					"items": [
 						{ "title": "Boards", "route": "boards", "icon_class": "fa fa-pencil-square-o" },
 						{ "title": "Admin", "route": "admin", "icon_class": "fa fa-wrench" },
-
+						{ "title": "About", "route": "about", "icon_class": "fa fa-caret-down" },
 						{
 							"title": "{{userEmail}}",
 							"items": [
@@ -291,15 +291,16 @@
 			],
 
 			"pages": [
-				{ "name": "home_private", "title": "Welcome {{userFullName}}!" },
-				{ "name": "storyall", 
+				{ "name": "welcome", "title": "Welcome {{userFullName}}!" },
+
+				{ "name": "mystory", 
 					"title": "Stories",
 					"components": [
 						{
 							"name": "story",
 							"type": "custom_component",
-							"custom_template": "files/storycover-all.html",
-							"query_name" : "boards_open",
+							"custom_template": "files/story-cover-my.html",
+							"query_name" : "boards",
 							"query_params": []
 						}
 					],
@@ -311,7 +312,7 @@
 								{
 									"name": "storytitle",
 									"type": "custom_component",
-									"custom_template": "files/storytitle.html",
+									"custom_template": "files/story-title.html",
 									"query_name" : "board_details_open",
 									"query_params": [
 										{ "name": "_id", "value": "this.params.boardId" }
@@ -320,46 +321,7 @@
 								{
 									"name": "storyline",
 									"type": "custom_component",
-									"custom_template": "files/storyline.html",
-									"query_name": "board_items_open",
-									"query_params": [
-										{ "name": "boardId", "value": "this.params.boardId" }
-									]
-								}
-							],
-							"template_rendered_code": "$('li.storyline-item:odd').addClass('storyline-inverted');"
-						}
-					]
-				},
-				{ "name": "my", 
-					"title": "Stories",
-					"components": [
-						{
-							"name": "story",
-							"type": "custom_component",
-							"custom_template": "files/storycover-my.html",
-							"query_name" : "boards",
-							"query_params": []
-						}
-					],
-					
-					"pages": [
-						{ "name": "storyline", 
-							"route_params": ["boardId"],
-							"components": [
-								{
-									"name": "storytitle",
-									"type": "custom_component",
-									"custom_template": "files/storytitle.html",
-									"query_name" : "board_details_open",
-									"query_params": [
-										{ "name": "_id", "value": "this.params.boardId" }
-									]
-								},
-								{
-									"name": "storyline",
-									"type": "custom_component",
-									"custom_template": "files/storyline.html",
+									"custom_template": "files/story-line.html",
 									"query_name": "board_items_open",
 									"query_params": [
 										{ "name": "boardId", "value": "this.params.boardId" }
@@ -377,7 +339,7 @@
 							{
 								"name": "edittitle",
 								"type": "custom_component",
-								"custom_template": "files/edittitle.html",
+								"custom_template": "files/edit-title.html",
 								"query_name" : "board_details_open",
 								"query_params": [
 									{ "name": "_id", "value": "this.params.boardId" }
@@ -386,7 +348,7 @@
 							{
 								"name": "editline",
 								"type": "custom_component",
-								"custom_template": "files/editline.html",
+								"custom_template": "files/edit-line.html",
 								"query_name": "board_items_open",
 								"query_params": [
 									{ "name": "boardId", "value": "this.params.boardId" }
@@ -396,7 +358,7 @@
 						"pages": [
 							{
 								"name": "card",
-								"custom_template": "files/editcard.html"
+								"custom_template": "files/edit-card.html"
 							}
 						]
 				},				
@@ -470,7 +432,7 @@
 								{
 									"name": "details_form",
 									"type": "custom_component",
-									"custom_template": "files/storytitle.html",
+									"custom_template": "files/story-title.html",
 									"query_name" : "board_details",
 								}
 							],

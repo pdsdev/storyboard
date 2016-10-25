@@ -24,6 +24,9 @@ sed -i 's;a class="navbar-brand" href="#";a class="navbar-brand" href="'$APP_HOM
 sed -i 's;{path: "/;{path: "/'$APP_ROOT'/;g' app/client/views/router.js
 sed -i 's;routePath === "/";routePath === "/'$APP_ROOT'/";' app/client/client.js
 
+# Allow both private and public when logged in
+sed -i -e 's;Router.ensureNotLogged;Router.ensureGranted;'  app/client/views/router.js
+
 # nemo64:bootstrap is not compatible with meteor 1.2+
 # Remove nemo64:bootstrap and replace with twbs:bootstrap
 cd app

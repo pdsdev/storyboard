@@ -29,7 +29,7 @@ Template.TEMPLATE_NAME.events({
 	"click #cancel": function(e, t) {
 		e.preventDefault();
 		var p = $(e.target).attr('data');
-		Router.go("storyall.line", { boardId : p} );
+		Router.go("story.line", { boardId : p} );
 		return false;
 	},
 	"click #save": function(e, t) {
@@ -88,7 +88,7 @@ Template.TEMPLATE_NAME.events({
 		});
 		// Post to data
 
-		Router.go("storyall.line", { boardId : p} );
+		Router.go("story.line", { boardId : p} );
 		return false;
 	}
 });

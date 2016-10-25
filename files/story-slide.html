@@ -8,11 +8,15 @@
 			{{> TEMPLATE_NAMETitle}}
 		{{/with}}
 	{{else}}
-		{{#with getItem}}
-			<div id="slide">
-				{{> TEMPLATE_NAMECard}}
-			</div>
-		{{/with}}
+		{{#if getItem}}
+			{{#with getItem}}
+				<div id="slide">
+					{{> TEMPLATE_NAMECard}}
+				</div>
+			{{/with}}
+		{{else}}
+			{{>TEMPLATE_NAMEEnd}}
+		{{/if}}
 	{{/if}}
 			  </div>
 {{else}}
@@ -56,3 +60,11 @@
 		</div>
 	</div>
 </template>
+
+<template name="TEMPLATE_NAMEEnd">
+    <!-- Story Title -->
+	<div class="storyend">
+		<h2>End</h2>
+	</div>
+</template>
+

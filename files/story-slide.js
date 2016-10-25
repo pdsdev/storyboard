@@ -25,7 +25,7 @@ Template.TEMPLATE_NAME.events({
 	'click #next': function() {
 		var cards = pageSession.get("cards");
 		var n = pageSession.get("currentCard");
-		if(n < cards.length-1)	{ pageSession.set("currentCard", n+1); }
+		if(n <= cards.length)	{ pageSession.set("currentCard", n+1); }
 	}
 });
 
@@ -43,12 +43,15 @@ Template.TEMPLATE_NAME.helpers({
 		var cards = pageSession.get("cards");
 		var n = pageSession.get("currentCard");
 		console.log("Card number: " + n);
+		if(n >= cards.length) { return null; }
 		console.log(JSON.stringify(cards[n], null, 3));
 		return cards[n];
 	},
 	"currentCard": function() {
 		var n = pageSession.get("currentCard");
+		var cards = pageSession.get("cards");
 		if(n < 0) return "T";	// Title
+		if(n >= cards.length) return "E";	// End
 		return (n + 1);
 	},
 	"isTitleCard": function() {
