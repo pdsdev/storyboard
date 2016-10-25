@@ -1,7 +1,7 @@
 Template.TEMPLATE_NAME.events({
 	"click #explore-button": function(e, t) {
 		e.preventDefault();
-		Router.go("storyall.storyline", {boardId: this._id});	// Jump to
+		Router.go("storyall.line", {boardId: this._id});	// Jump to
 		return false;
 	}
 });

@@ -13,7 +13,10 @@
 .jumbotron p a {
 	color: yellow;
 }
-
+.ghost {
+	opacity: 0.1;
+	font-size: 200%;
+}
 .dragover {
 	background-color: grey;
 }

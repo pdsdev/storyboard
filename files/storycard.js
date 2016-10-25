@@ -2,7 +2,7 @@ Template.TEMPLATE_NAME.rendered = function() {
 };
 
 Template.TEMPLATE_NAME.events({
-	'click .storyline-heading': function(e, t) {
+	"click .storyline-heading": function(e, t) {
 		e.preventDefault();
 		p = $(e.target).closest(".storyline-panel");
 		if(p) { 
@@ -11,7 +11,7 @@ Template.TEMPLATE_NAME.events({
 		}
 		return false;
 	},
-	'click .storyline-body': function(e, t) {
+	"click .storyline-body": function(e, t) {
 		e.preventDefault();
 		p = $(e.target).closest(".storyline-panel");
 		if(p) { 
@@ -21,7 +21,7 @@ Template.TEMPLATE_NAME.events({
 		
 		return false;
 	},
-	'click .storyline-footer': function(e, t) {
+	"click .storyline-footer": function(e, t) {
 		e.preventDefault();
 		p = $(e.target).closest(".storyline-panel");
 		if(p) { 
@@ -33,7 +33,7 @@ Template.TEMPLATE_NAME.events({
 });
 
 Template.TEMPLATE_NAME.helpers({
-	'getItems': function() {
+	"getItems": function() {
 		return TEMPLATE_NAMEItems(this.QUERY_NAME);	// Match query name
 	}
 });

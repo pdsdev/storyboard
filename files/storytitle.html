@@ -1,9 +1,10 @@
 <template name="TEMPLATE_NAME">
-	{{#if canEdit QUERY_NAME.ownerId}}
 		<div class="fixed-right">
+		{{#if canEdit QUERY_NAME.ownerId}}
 			<button id="edit" data="{{QUERY_NAME._id}}"><span class="fa fa-edit"></span>Edit</button>
+		{{/if}}
+			<div class="fixed-right ghost"><span id="play" class="fa fa-play" data="{{QUERY_NAME._id}}"></span></div>
 		</div>
-	{{/if}}
 
 <div class="storytitle">
 	<h2>{{QUERY_NAME.title}}</h2>

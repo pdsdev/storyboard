@@ -1,0 +1,22 @@
+<template name="TEMPLATE_NAME">
+    <!-- Story Card -->
+    <div class="storyline-panel" data="{{delveURL}}">
+		<div class="storyline-heading">
+			<h4>{{title}}</h4>
+		</div>
+		<div class="storyline-body" data="{{delveURL}}">
+		   {{#if imageURL}}
+			<figure class="image">
+				<img id="figure-img" src="{{imageURL}}" alt="{{title}} data="{{delveURL}}"">
+				<figcaption>{{imageCaption}}</figcaption>
+			</figure>
+			{{/if}}
+			<div class="storyline-text">{{#markdown}}{{description}}{{/markdown}}</div>
+		</div>
+		<div class="storyline-footer">
+		   {{#if delveURL}}
+				<p class="text-right"><span id="delve-button" data="{{delveURL}}" title="Delve">Delve <i class="fa fa-external-link"></i></span></p>
+			{{/if}}
+		</div>
+	</div>
+</template>

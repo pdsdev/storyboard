@@ -180,7 +180,7 @@
 					],
 					
 					"pages": [
-						{ "name": "storyline", 
+						{ "name": "line", 
 							"route_params": ["boardId"],
 							"components": [
 								{
@@ -203,7 +203,31 @@
 								}
 							],
 							"template_rendered_code": "$('li.storyline-item:odd').addClass('storyline-inverted');"
+						},
+						{ "name": "slide", 
+							"route_params": ["boardId"],
+							"components": [
+								{
+									"name": "storytitle",
+									"type": "custom_component",
+									"custom_template": "files/blank.html",
+									"query_name" : "board_details_open",
+									"query_params": [
+										{ "name": "_id", "value": "this.params.boardId" }
+									]
+								},
+								{
+									"name": "storyslide",
+									"type": "custom_component",
+									"custom_template": "files/storyslide.html",
+									"query_name": "board_items_open",
+									"query_params": [
+										{ "name": "boardId", "value": "this.params.boardId" }
+									]
+								}
+							]
 						}
+
 					]
 				},
 				
@@ -242,7 +266,7 @@
 					"items": [
 						{ "title": "Home", "route": "home_private", "icon_class": "fa fa-home" },
 						{ "title": "Stories", "route": "storyall", "icon_class": "fa fa-book" },
-						{ "title": "MyStories", "route": "storymy", "icon_class": "fa fa-map-o" }
+						{ "title": "MyStories", "route": "my", "icon_class": "fa fa-map-o" }
 					]
 				},
 				{
@@ -281,7 +305,7 @@
 					],
 					
 					"pages": [
-						{ "name": "storyline", 
+						{ "name": "line", 
 							"route_params": ["boardId"],
 							"components": [
 								{
@@ -307,7 +331,7 @@
 						}
 					]
 				},
-				{ "name": "storymy", 
+				{ "name": "my", 
 					"title": "Stories",
 					"components": [
 						{

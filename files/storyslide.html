@@ -1,0 +1,58 @@
+<template name="TEMPLATE_NAME">
+
+{{#if getItems}}
+	<div class="storyslide">
+	  <div class="fixed-right ghost"><span id="line" class="fa fa-reply"></span><span id="prev" class="fa fa-play fa-flip-horizontal"></span>{{currentCard}}<span id="next" class="fa fa-play"></span></div>
+	{{#if isTitleCard}}
+		{{#with boardInfo}}
+			{{> TEMPLATE_NAMETitle}}
+		{{/with}}
+	{{else}}
+		{{#with getItem}}
+			<div id="slide">
+				{{> TEMPLATE_NAMECard}}
+			</div>
+		{{/with}}
+	{{/if}}
+			  </div>
+{{else}}
+	<div class="alert alert-info">
+		This story is empty. :(
+	</div>
+
+{{/if}}
+</template>
+
+<template name="TEMPLATE_NAMETitle">
+    <!-- Story Title -->
+	<div class="storytitle">
+		<h2>{{title}}</h2>
+		<p>{{description}}</p>
+		<figure class="image">
+			<img id="figure-img" src="{{imageURL}}" alt="{{title}}">
+		</figure>		
+	</div>
+</template>
+
+<template name="TEMPLATE_NAMECard">
+    <!-- Story Card -->
+    <div class="storyline-panel" data="{{delveURL}}">
+		<div class="storyline-heading">
+			<h4>{{title}}</h4>
+		</div>
+		<div class="storyline-body" data="{{delveURL}}">
+		   {{#if imageURL}}
+			<figure class="image">
+				<img id="figure-img" src="{{imageURL}}" alt="{{title}}" data="{{delveURL}}">
+				<figcaption>{{imageCaption}}</figcaption>
+			</figure>
+			{{/if}}
+			<div class="storyline-text">{{#markdown}}{{description}}{{/markdown}}</div>
+		</div>
+		<div class="storyline-footer">
+		   {{#if delveURL}}
+				<p class="text-right"><span id="delve-button" data="{{delveURL}}" title="Delve">Delve <i class="fa fa-external-link"></i></span></p>
+			{{/if}}
+		</div>
+	</div>
+</template>

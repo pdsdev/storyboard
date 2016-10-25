@@ -1,17 +1,17 @@
 Template.TEMPLATE_NAME.events({
 	"click .storycard-heading": function(e, t) {
 		e.preventDefault();
-		Router.go("story.storyline", {boardId: this._id});	// Jump to
+		Router.go("story.line", {boardId: this._id});	// Jump to
 		return false;
 	},
 	"click .storycard-body": function(e, t) {
 		e.preventDefault();
-		Router.go("story.storyline", {boardId: this._id});	// Jump to
+		Router.go("story.line", {boardId: this._id});	// Jump to
 		return false;
 	},
 	"click .storycard-footing": function(e, t) {
 		e.preventDefault();
-		Router.go("story.storyline", {boardId: this._id});	// Jump to
+		Router.go("story.line", {boardId: this._id});	// Jump to
 		return false;
 	}
 });

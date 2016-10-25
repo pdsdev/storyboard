@@ -1,4 +1,9 @@
 Template.TEMPLATE_NAME.events({
+	"click #play": function(e, t) {
+		e.preventDefault();
+		var p = $(e.target).attr('data');
+		Router.go('story.slide', {boardId: p});
+	},
 	"click #edit": function(e, t) {
 		e.preventDefault();
 		var p = $(e.target).attr('data');
