@@ -26,7 +26,36 @@ Template.TEMPLATE_NAME.events({
 		var cards = pageSession.get("cards");
 		var n = pageSession.get("currentCard");
 		if(n <= cards.length)	{ pageSession.set("currentCard", n+1); }
+	},
+	'click .storyline-heading': function(e, t) {
+		e.preventDefault();
+		p = $(e.target).closest(".storyline-panel");
+		if(p) { 
+			url = $(p).attr("data");
+			if(url) { window.open(url); } 
+		}
+		return false;
+	},
+	'click .storyline-body': function(e, t) {
+		e.preventDefault();
+		p = $(e.target).closest(".storyline-panel");
+		if(p) { 
+			url = $(p).attr("data");
+			if(url) { window.open(url); }
+		}
+		
+		return false;
+	},
+	'click .storyline-footer': function(e, t) {
+		e.preventDefault();
+		p = $(e.target).closest(".storyline-panel");
+		if(p) { 
+			url = $(p).attr("data");
+			if(url) { window.open(url); }
+		}
+		return false;
 	}
+	
 });
 
 Template.TEMPLATE_NAME.helpers({

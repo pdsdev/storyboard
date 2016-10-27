@@ -7,7 +7,7 @@ Template.TEMPLATE_NAME.events({
 		p = $(e.target).closest(".storyline-panel");
 		if(p) { 
 			url = $(p).attr("data");
-			if(url) { window.open(url); } // Router.go("boards.edit", {boardId: this._id});
+			if(url) { window.open(url); }
 		}
 		return false;
 	},
@@ -16,7 +16,7 @@ Template.TEMPLATE_NAME.events({
 		p = $(e.target).closest(".storyline-panel");
 		if(p) { 
 			url = $(p).attr("data");
-			if(url) { window.open(url); } // Router.go("boards.edit", {boardId: this._id});
+			if(url) { window.open(url); }
 		}
 		
 		return false;
@@ -26,7 +26,7 @@ Template.TEMPLATE_NAME.events({
 		p = $(e.target).closest(".storyline-panel");
 		if(p) { 
 			url = $(p).attr("data");
-			if(url) { window.open(url); } // Router.go("boards.edit", {boardId: this._id});
+			if(url) { window.open(url); }
 		}
 		return false;
 	}

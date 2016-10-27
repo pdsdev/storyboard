@@ -1,7 +1,22 @@
 Template.TEMPLATE_NAME.events({
+	"click .storycard-heading": function(e, t) {
+		e.preventDefault();
+		Router.go("mystory.line", {boardId: this._id});	// Jump to
+		return false;
+	},
+	"click .storycard-body": function(e, t) {
+		e.preventDefault();
+		Router.go("mystory.line", {boardId: this._id});	// Jump to
+		return false;
+	},
+	"click .storycard-footing": function(e, t) {
+		e.preventDefault();
+		Router.go("mystory.line", {boardId: this._id});	// Jump to
+		return false;
+	},
 	"click #explore-button": function(e, t) {
 		e.preventDefault();
-		Router.go("storymy.line", {boardId: this._id});	// Jump to
+		Router.go("mystory.line", {boardId: this._id});	// Jump to
 		return false;
 	}
 });

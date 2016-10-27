@@ -6,6 +6,31 @@
 	height: 100px
 }
 /* -----------------------------------------------
+ * storytitle
+ * --------------------------------------------- */
+.storytitle h1,h2 {
+	 text-align:center;
+}
+
+.storyslide > .storytitle {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+}
+
+/* -----------------------------------------------
+ * storyend
+ * --------------------------------------------- */
+.storyslide .storyend {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+}
+/* -----------------------------------------------
  * storycard
  * --------------------------------------------- */
 .storycard {
@@ -58,7 +83,7 @@
 /* -----------------------------------------------
  * storyline
  * --------------------------------------------- */
- .storyline {
+.storyline {
     list-style: none;
     padding: 10px 0;
     position: relative;
@@ -74,7 +99,7 @@
     left: 50%;
     margin-left: -2.5px;
 }
- .storyline-text table tr {
+.storyline-text table tr {
 	border-bottom: solid thin;
 }
 .storyline-text table tr:first-child {
