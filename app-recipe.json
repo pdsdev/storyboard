@@ -86,7 +86,8 @@
 			{
 				"name": "boards",
 				"collection": "boards",
-				"filter": {}
+				"filter": { },
+				"options": { "sort" : { "title": 1 } }
 			},
 			{
 				"name": "boards_empty",
@@ -119,15 +120,33 @@
 				"find_one": true
 			},
 			{
+				"name": "boards_my",
+				"collection": "boards",
+				"filter": { "blocked": false },
+				"options": { "sort" : { "title": 1 } }
+			},
+			{
+				"name": "board_details_my",
+				"collection": "boards",
+				"filter": { "_id": ":boardId", "blocked": false },
+ 				"find_one": true
+			},
+			{
+				"name": "board_items_my",
+				"collection": "board_items",
+				"filter": { "boardId": ":boardId" },
+				"options": { "sort" : { "step": 1 } }
+			},
+			{
 				"name": "boards_open",
 				"collection": "boards",
-				"filter": { "private": false },
-				"options": {}
+				"filter": { "private": false, "blocked": false },
+				"options": { "sort" : { "title": 1 } }
 			},
 			{
 				"name": "board_details_open",
 				"collection": "boards",
-				"filter": { "_id": ":boardId", "private": false },
+				"filter": { "_id": ":boardId", "private": false, "blocked": false },
  				"find_one": true
 			},
 			{
@@ -158,7 +177,7 @@
 					"class": "nav navbar-nav navbar-right",
 					"scroll_spy_selector": "body",
 					"items": [
-						{ "title": "About", "route": "about", "icon_class": "fa fa-caret-down" },
+						{ "title": "About", "route": "about", "icon_class": "fa fa-question-circle-o" },
 						{ "title": "Register", "route": "register", "icon_class": "fa fa-pencil-square-o" },
 						{ "title": "Login", "route": "login", "icon_class": "fa fa-sign-in" }
 					]
@@ -275,9 +294,8 @@
 					"class": "nav navbar-nav navbar-right",
 					"dest_selector": "#menu",
 					"items": [
-						{ "title": "Boards", "route": "boards", "icon_class": "fa fa-pencil-square-o" },
 						{ "title": "Admin", "route": "admin", "icon_class": "fa fa-wrench" },
-						{ "title": "About", "route": "about", "icon_class": "fa fa-caret-down" },
+						{ "title": "About", "route": "about", "icon_class": "fa fa-question-circle-o" },
 						{
 							"title": "{{userEmail}}",
 							"items": [
@@ -300,7 +318,7 @@
 							"name": "story",
 							"type": "custom_component",
 							"custom_template": "files/story-cover-my.html",
-							"query_name" : "boards",
+							"query_name" : "boards_my",
 							"query_params": []
 						}
 					],
@@ -313,7 +331,7 @@
 									"name": "storytitle",
 									"type": "custom_component",
 									"custom_template": "files/story-title.html",
-									"query_name" : "board_details_open",
+									"query_name" : "board_details_my",
 									"query_params": [
 										{ "name": "_id", "value": "this.params.boardId" }
 									]
@@ -322,7 +340,7 @@
 									"name": "storyline",
 									"type": "custom_component",
 									"custom_template": "files/story-line.html",
-									"query_name": "board_items_open",
+									"query_name": "board_items_my",
 									"query_params": [
 										{ "name": "boardId", "value": "this.params.boardId" }
 									]
@@ -340,7 +358,7 @@
 								"name": "edittitle",
 								"type": "custom_component",
 								"custom_template": "files/edit-title.html",
-								"query_name" : "board_details_open",
+								"query_name" : "board_details_my",
 								"query_params": [
 									{ "name": "_id", "value": "this.params.boardId" }
 								]
@@ -349,7 +367,7 @@
 								"name": "editline",
 								"type": "custom_component",
 								"custom_template": "files/edit-line.html",
-								"query_name": "board_items_open",
+								"query_name": "board_items_my",
 								"query_params": [
 									{ "name": "boardId", "value": "this.params.boardId" }
 								]
@@ -362,156 +380,6 @@
 							}
 						]
 				},				
-
-				{
-					"name": "boards",
-					"components": [
-						{
-							"name": "view",
-							"type": "data_view",
-							"title": "Storyboards",
-							"text_if_empty": "No storyboards :(",
-
-							"query_name": "boards",
-							"query_params": [],
-
-							"insert_route": "boards.insert",
-							"edit_route": "boards.edit",
-							"edit_route_params": [
-								{ "name": "boardId", "value": "this._id" }
-							],
-							"details_route": "boards.details",
-							"details_route_params": [
-								{ "name": "boardId", "value": "this._id" }
-							]
-						}
-					],
-					"pages": [
-						{
-							"name": "insert",
-							"components": [
-								{
-									"name": "insert_form",
-									"type": "form",
-									"mode": "insert",
-									"title": "New storyboard",
-									"class": "form-horizontal",
-
-									"query_name": "boards_empty",
-									"query_params": [],
-
-									"submit_route": "boards",
-									"cancel_route": "boards"
-								}
-							]
-						},
-
-						{
-							"name": "edit",
-							"route_params": ["boardId"],
-							"components": [
-								{
-									"name": "edit_form",
-									"type": "form",
-									"mode": "update",
-									"title": "Edit storyboard",
-									"submit_route": "boards",
-									"cancel_route": "boards",
-
-									"query_name": "board_details",
-									"query_params": []
-								}
-							]
-						},
-						
-						{
-							"name": "details",
-							"template": "page_subcontent_tabnav",
-							"route_params": ["boardId"],
-							"components": [
-								{
-									"name": "details_form",
-									"type": "custom_component",
-									"custom_template": "files/story-title.html",
-									"query_name" : "board_details",
-								}
-							],
-
-							"force_yield_subpages": true,
-							"pages": [
-								{
-									"name": "items",
-									"components": [
-										{
-											"name": "view",
-											"type": "data_view",
-											"text_if_empty": "No items :(",
-											"query_name": "board_items",
-											"insert_button_title": "Add item",
-											"insert_route": "boards.details.insert",
-											"insert_route_params": [
-												{ "name": "boardId", "value": "this.params.boardId" }
-											],
-											"edit_route": "boards.details.edit",
-											"edit_route_params": [
-												{ "name": "boardId", "value": "UI._parentData(1).params.boardId" },
-												{ "name": "itemId", "value": "this._id" }
-											]
-										}
-									]
-								},
-
-								{
-									"name": "insert",
-									"components": [										
-										{
-											"name": "insert_form",
-											"type": "form",
-											"mode": "insert",
-											"title": "Add item",
-											"query_name": "board_items_empty",
-
-											"hidden_fields": [
-												{ "name": "boardId", "value": "this.params.boardId" }
-											],
-
-											"submit_route": "boards.details",
-											"submit_route_params": [
-												{ "name": "boardId", "value": "this.params.boardId"}
-											],
-											"cancel_route": "boards.details",
-											"cancel_route_params": [
-												{ "name": "boardId", "value": "this.params.boardId"}
-											]
-										}
-									]
-								},
-
-								{
-									"name": "edit",
-									"route_params": ["itemId"],
-									"components": [
-										{
-											"name": "edit_form",
-											"type": "form",
-											"mode": "update",
-											"title": "Edit item",
-											"query_name": "board_item",
-											"submit_route": "boards.details",
-											"submit_route_params": [
-												{ "name": "boardId", "value": "this.params.boardId"}
-											],
-											"cancel_route": "boards.details",
-											"cancel_route_params": [
-												{ "name": "boardId", "value": "this.params.boardId"}
-											]
-										}
-									]
-								}
-							]
-						}
-					]
-				},
 				
 				{ "name": "admin",
 					"roles": ["admin"],
@@ -524,7 +392,7 @@
 							"class": "nav nav-stacked nav-pills",
 							"items": [
 								{ "title": "Users", "route": "admin.users" },
-								{ "title": "Boards", "route": "boards" }
+								{ "title": "Boards", "route": "admin.boards" }
 							]
 						}
 					],
@@ -630,6 +498,156 @@
 														{ "value": "user", "title": "User" },
 														{ "value": "admin", "title": "Admin" },
 														{ "value": "blocked", "title": "Blocked" }
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						
+						{
+							"name": "boards",
+							"components": [
+								{
+									"name": "view",
+									"type": "data_view",
+									"title": "Storyboards",
+									"text_if_empty": "No storyboards :(",
+
+									"query_name": "boards",
+									"query_params": [],
+
+									"insert_route": "admin.boards.insert",
+									"edit_route": "admin.boards.edit",
+									"edit_route_params": [
+										{ "name": "boardId", "value": "this._id" }
+									],
+									"details_route": "admin.boards.details",
+									"details_route_params": [
+										{ "name": "boardId", "value": "this._id" }
+									]
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"components": [
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "New storyboard",
+											"class": "form-horizontal",
+
+											"query_name": "boards_empty",
+											"query_params": [],
+
+											"submit_route": "admin.boards",
+											"cancel_route": "admin.boards"
+										}
+									]
+								},
+
+								{
+									"name": "edit",
+									"route_params": ["boardId"],
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "Edit storyboard",
+											"submit_route": "admin.boards",
+											"cancel_route": "admin.boards",
+
+											"query_name": "board_details",
+											"query_params": []
+										}
+									]
+								},
+								
+								{
+									"name": "details",
+									"template": "page_subcontent_tabnav",
+									"route_params": ["boardId"],
+									"components": [
+										{
+											"name": "details_form",
+											"type": "custom_component",
+											"custom_template": "files/story-title.html",
+											"query_name" : "board_details",
+										}
+									],
+
+									"force_yield_subpages": true,
+									"pages": [
+										{
+											"name": "items",
+											"components": [
+												{
+													"name": "view",
+													"type": "data_view",
+													"text_if_empty": "No items :(",
+													"query_name": "board_items",
+													"insert_button_title": "Add item",
+													"insert_route": "admin.boards.details.insert",
+													"insert_route_params": [
+														{ "name": "boardId", "value": "this.params.boardId" }
+													],
+													"edit_route": "admin.boards.details.edit",
+													"edit_route_params": [
+														{ "name": "boardId", "value": "UI._parentData(1).params.boardId" },
+														{ "name": "itemId", "value": "this._id" }
+													]
+												}
+											]
+										},
+
+										{
+											"name": "insert",
+											"components": [										
+												{
+													"name": "insert_form",
+													"type": "form",
+													"mode": "insert",
+													"title": "Add item",
+													"query_name": "board_items_empty",
+
+													"hidden_fields": [
+														{ "name": "boardId", "value": "this.params.boardId" }
+													],
+
+													"submit_route": "admin.boards.details",
+													"submit_route_params": [
+														{ "name": "boardId", "value": "this.params.boardId"}
+													],
+													"cancel_route": "admin.boards.details",
+													"cancel_route_params": [
+														{ "name": "boardId", "value": "this.params.boardId"}
+													]
+												}
+											]
+										},
+
+										{
+											"name": "edit",
+											"route_params": ["itemId"],
+											"components": [
+												{
+													"name": "edit_form",
+													"type": "form",
+													"mode": "update",
+													"title": "Edit item",
+													"query_name": "board_item",
+													"submit_route": "admin.boards.details",
+													"submit_route_params": [
+														{ "name": "boardId", "value": "this.params.boardId"}
+													],
+													"cancel_route": "admin.boards.details",
+													"cancel_route_params": [
+														{ "name": "boardId", "value": "this.params.boardId"}
 													]
 												}
 											]

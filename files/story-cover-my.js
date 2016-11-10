@@ -1,4 +1,10 @@
 Template.TEMPLATE_NAME.events({
+	"click #new": function(e, t) {
+		e.preventDefault();
+		// Router.go("story.line", { boardId : p} );
+		alert("Create new");
+		return false;
+	},
 	"click .storycard-heading": function(e, t) {
 		e.preventDefault();
 		Router.go("mystory.line", {boardId: this._id});	// Jump to
@@ -32,7 +38,7 @@ var TEMPLATE_NAMEItems = function(cursor) {
 	if(!cursor) {
 		return [];
 	}
-	var raw = cursor.sort({"title": 1}).fetch();
+	var raw = cursor.fetch();
 	
 	return raw;
 }

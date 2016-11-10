@@ -1,4 +1,7 @@
 <template name="TEMPLATE_NAME">
+	<div class="fixed-right"> 
+		<button id="new"><span class="fa fa-download"></span>New</button>
+	</div>
 
 {{#if getItems}}
 	{{#each getItems}}
@@ -8,6 +11,9 @@
         </div>
         <div class="storycard-panel">
             <div class="storycard-heading">
+				{{#if private}}
+				<div class="pull-right"><span class="fa fa-lock"></span></div>
+				{{/if}}
                 <h4>{{title}}</h4>
             </div>
             <div class="storycard-body">

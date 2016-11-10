@@ -45,9 +45,16 @@ Template.TEMPLATE_NAME.events({
 		return false;
 	},
 	'click [name="new-item"]': function(e, t) {
+		var elem = $('#storyline li').last();
+		
 		Blaze.renderWithData(Template.EditCard, 
 			{title: "", imageURL: "#", imageCaption: "", delveURL: "", description: ""},
-			$('#storyline')[0], $('#storyline li').last()[0]);	// [0] is the element in the DOM
+			$('#storyline')[0], elem[0]);  	// [0] is the element in the DOM
+		
+		if($('#message') != undefined) {
+			$('#message').remove();
+			$(elem).addClass('clearfix no-float');
+		}
 		return false;
 	}
 });

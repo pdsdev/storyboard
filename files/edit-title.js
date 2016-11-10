@@ -29,7 +29,7 @@ Template.TEMPLATE_NAME.events({
 	"click #cancel": function(e, t) {
 		e.preventDefault();
 		var p = $(e.target).attr('data');
-		Router.go("story.line", { boardId : p} );
+		Router.go("mystory.line", { boardId : p} );
 		return false;
 	},
 	"click #save": function(e, t) {
@@ -38,6 +38,7 @@ Template.TEMPLATE_NAME.events({
 		var story = { 
 			title: $('[name="story-title"]').val(),
 			imageURL: $('[name="story-image-url"]').val(),
+			'private': $('#story-private').is(':checked'),
 			description: $('[name="story-description"]').val()
 		}
 		// alert("Story:" + JSON.stringify(story, null, 3));
@@ -88,12 +89,17 @@ Template.TEMPLATE_NAME.events({
 		});
 		// Post to data
 
-		Router.go("story.line", { boardId : p} );
+		Router.go("mystory.line", { boardId : p} );
 		return false;
 	}
 });
 
 Template.TEMPLATE_NAME.helpers({
+	isChecked: function(value) {
+		if(value) return "checked";
+		
+		return "";
+	}
 });
 
 // Re-usable functions

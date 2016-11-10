@@ -4,20 +4,28 @@
 		<button id="cancel" data="{{QUERY_NAME._id}}"><span class="fa fa-minus-circle"></span>Cancel</button>
 	</div>
 
-<div class="storytitle">
-		<h2><input name="story-title" type="text" size="60" placeholder="Enter a title" value="{{board_details_open.title}}" /></h2>
+	<div class="storytitle">
+	    {{#with board_details_my}}
+		{{#if private}}
+		<div class="pull-right"><span class="fa fa-lock"></span></div>
+		{{/if}}
+		<h2><input name="story-title" type="text" size="60" placeholder="Enter a title" value="{{title}}" /></h2>
 		<div>
 			<div class="pull-left">
-				<p><textarea name="story-description" rows="3" cols="80" placeholder="Overview of the story">{{board_details_open.description}}</textarea></p>
-				<p><input name="story-image-url" type="text" size="78" placeholder="Enter an image URL" value="{{board_details_open.imageURL}}" /></p>
+				<p><textarea name="story-description" rows="3" cols="80" placeholder="Overview of the story">{{description}}</textarea></p>
+				<p><input name="story-image-url" type="text" size="78" placeholder="Enter an image URL" value="{{imageURL}}" /></p>
 			</div>
 			<div>
 				<figure class="image thumbnail">
-					<img id="story-img" name="story-img" src="{{board_details_open.imageURL}}">
+					<img id="story-img" name="story-img" src="{{imageURL}}">
 				</figure>
 			</div>
+			<div class="pull-right">
+			   <input id="story-private" type="checkbox"  {{isChecked private}}> <span class="fa fa-lock"></span> Private
+			</div>
 		</div>
+		{{/with}}
 		<div class="clearfix"></div>
-</div>
+	</div>
 
 </template>
