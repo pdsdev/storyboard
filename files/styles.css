@@ -20,6 +20,9 @@
 .dragover {
 	background-color: grey;
 }
+.pad-top {
+	padding-top : 50px;
+}
 figure.image {
   display: inline-block;
   

@@ -1,8 +1,15 @@
 Template.TEMPLATE_NAME.events({
 	"click #new": function(e, t) {
 		e.preventDefault();
+		Boards.insert( { "title" : "Set the Title", "description" : "", "private" : true, "blocked" : false, "shared" : "none" }, function(err, id) {
+			if(err) {
+				pageSession.set("errorMessage", err.message);
+			} else {	// Jump to edit
+				Router.go("edit", { boardId : id} );
+			}
+		} );
 		// Router.go("story.line", { boardId : p} );
-		alert("Create new");
+		// alert("Create new");
 		return false;
 	},
 	"click .storycard-heading": function(e, t) {
