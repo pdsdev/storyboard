@@ -122,13 +122,13 @@
 			{
 				"name": "boards_my",
 				"collection": "boards",
-				"filter": { "blocked": false },
+				"filter": { "blocked": false, "ownerId" : "Meteor.userId()" },
 				"options": { "sort" : { "title": 1 } }
 			},
 			{
 				"name": "board_details_my",
 				"collection": "boards",
-				"filter": { "_id": ":boardId", "blocked": false },
+				"filter": { "_id": ":boardId", "blocked": false, "ownerId" : "Meteor.userId()" },
  				"find_one": true
 			},
 			{
