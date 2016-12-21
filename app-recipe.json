@@ -4,7 +4,7 @@
 
 		"theme": "bootswatch-cerulean",
 
-		"footer_text": "Copyright &copy; 2016",
+		"footer_text": "<span class=\"pull-right\">1.0.0</span>Copyright &copy; 2016",
 		
 		"roles": [ "admin", "user" ],
 		"default_role": "user",
@@ -19,6 +19,7 @@
 		"copy_files": [
 			{ "source": "files/styles.css", "dest": "CLIENT_STYLES_DIR/styles.css" },
 			{ "source": "files/storyboard.css", "dest": "CLIENT_STYLES_DIR/storyboard.css" },
+			{ "source": "files/message_utils.js", "dest": "CLIENT_LIB_DIR/message_utils.js" },
 			{ "source": "files/jumbotron-bg.jpg", "dest": "PUBLIC_IMAGES_DIR/jumbotron-bg.jpg" }
 		],
 		

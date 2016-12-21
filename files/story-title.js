@@ -1,12 +1,14 @@
 Template.TEMPLATE_NAME.events({
 	"click #play": function(e, t) {
 		e.preventDefault();
-		var p = $(e.target).attr('data');
+		// var p = $(e.target).attr('data');
+		var p = this.params.boardId;
 		Router.go('story.slide', {boardId: p});
 	},
 	"click #edit": function(e, t) {
 		e.preventDefault();
-		var p = $(e.target).attr('data');
+		// var p = $(e.target).attr('data');
+		var p = this.params.boardId;
 		Router.go("edit", { boardId : p} );
 		return false;
 	}

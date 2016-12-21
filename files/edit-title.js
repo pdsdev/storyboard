@@ -28,27 +28,26 @@ Template.TEMPLATE_NAME.events({
 	},
 	"click #cancel": function(e, t) {
 		e.preventDefault();
-		var p = $(e.target).attr('data');
-		Router.go("mystory.line", { boardId : p} );
+		Router.go("mystory.line", { boardId : this.params.boardId} );
 		return false;
 	},
 	"click #save": function(e, t) {
 		e.preventDefault();
-		var p = $(e.target).attr('data');
+		
 		var story = { 
 			title: $('[name="story-title"]').val(),
 			imageURL: $('[name="story-image-url"]').val(),
 			'private': $('#story-private').is(':checked'),
 			description: $('[name="story-description"]').val()
 		}
-		// alert("Story:" + JSON.stringify(story, null, 3));
-		var boardId = $('#save').attr('data');
-		// alert("Updating: " + boardId);
+
+		var boardId = this.params.boardId;
 		if(boardId) {
 			Boards.update({ _id: boardId }, { $set: story }, function(e) { if(e) errorAction(e) });
 		} else {
 			errorAction(new Meteor.Error("no-document", "No document is associated with the sotryboard."));
 		}
+		
 		var cards = [];
 		$('#storyline li').each(function(i, el){
 			var data = Blaze.getData(el);
@@ -89,7 +88,7 @@ Template.TEMPLATE_NAME.events({
 		});
 		// Post to data
 
-		Router.go("mystory.line", { boardId : p} );
+		Router.go("mystory.line", { boardId : boardId} );
 		return false;
 	}
 });

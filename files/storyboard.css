@@ -178,6 +178,9 @@
     border-bottom: 14px solid transparent;
     content:" ";
 }
+.storyline-edit > li {
+    margin-bottom: 0px;
+}
 .storyline-panel-edit {
 	vertical-align: top;
     margin-left: calc(100vw/2);

@@ -2,7 +2,7 @@
 <template name="TEMPLATE_NAME">
 
 {{#if getItems}}
-   <ul id="storyline" class="storyline">
+   <ul id="storyline" class="storyline storyline-edit">
 	{{#each getItems}}
 		{{> EditCard}}
 	{{/each}}
@@ -13,7 +13,7 @@
 	</div>
 
 {{else}}
-	<ul id="storyline" class="storyline">
+	<ul id="storyline" class="storyline storyline-edit">
 	<li></li>
 	</ul>
 	<div class="pull-right"> 

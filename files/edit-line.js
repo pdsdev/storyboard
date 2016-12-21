@@ -1,6 +1,8 @@
 Template.TEMPLATE_NAME.rendered = function() {
-	// This makes every other item appear on the right side of the line
-	$( "#storyline" ).disableSelection();
+	// Disable selection if not editing
+	if( ! $( "#storyline" ).hasClass("storyline-edit") ) {
+		$( "#storyline" ).disableSelection();
+	}
 	
 	// Make the list sortable with drap and drop
 	this.$('#storyline').sortable({
